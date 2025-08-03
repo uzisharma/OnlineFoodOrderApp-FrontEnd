@@ -48,40 +48,43 @@ export default function AddRestaurant() {
   };
 
   return (
-    <div className="wrapper">
-      <div className="form-container">
-        <h1>Add Restaurant</h1>
-        <form onSubmit={handleSubmit} method="post">
-          <Input
-            type="text"
-            placeholder="Restaurant Name"
-            name="restaurantName"
-            changeFun={setName}
-          />
-          <Input
-            type="text"
-            placeholder="Email"
-            name="email"
-            changeFun={setEmail}
-          />
-          <Input
-            type="number"
-            placeholder="Contact"
-            name="contactNumber"
-            changeFun={setContact}
-          />
-          <Input
-            type="text"
-            placeholder="Address"
-            name="address"
-            changeFun={setAddress}
-          />
-          <div className="button-container">
-            <Button label="Submit" />
-            <Button type="reset" label="Reset" />
-          </div>
-        </form>
+    <>
+      <title>Add Restaurant</title>
+      <div className="wrapper">
+        <div className="form-container">
+          <h1>Add Restaurant</h1>
+          <form onSubmit={handleSubmit} method="post">
+            <Input
+              type="text"
+              placeholder="Restaurant Name"
+              name="restaurantName"
+              changeFun={setName}
+            />
+            <Input
+              type="text"
+              placeholder="Email"
+              name="email"
+              changeFun={setEmail}
+            />
+            <Input
+              type="number"
+              placeholder="Contact"
+              name="contactNumber"
+              changeFun={setContact}
+            />
+            <Input
+              type="text"
+              placeholder="Address"
+              name="address"
+              changeFun={setAddress}
+            />
+            <div className="button-container">
+              <Button label="Submit" />
+              <Button type="reset" label="Reset" />
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

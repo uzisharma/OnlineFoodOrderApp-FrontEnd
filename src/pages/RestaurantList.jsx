@@ -27,6 +27,7 @@ export default function RestaurantList() {
 
   return (
     <div className="restaurant-list-container">
+      <title>Restaurants List</title>
       <Search
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption}
