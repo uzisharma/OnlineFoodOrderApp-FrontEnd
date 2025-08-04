@@ -2,25 +2,26 @@ import React, { useEffect } from "react";
 import "./Table.style.css";
 
 export default function Table({ resList, setResList, title }) {
-  const fetchData = async () => {
-    try {
-      const response = await fetch(
-        "http://localhost:8080/restaurant/api/getAll"
-      );
-      const data = await response.json();
-      setResList(data.data);
-      console.log(data);
-    } catch (error) {
-      console.log(
-        "Failed to fetch data, please start the SpringBootApplication",
-        error
-      );
-    }
-  };
+
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8080/restaurant/api/getAll"
+        );
+        const data = await response.json();
+        setResList(data.data);
+        console.log(data);
+      } catch (error) {
+        console.log(
+          "Failed to fetch data, please start the SpringBootApplication",
+          error
+        );
+      }
+    };
     fetchData();
-  }, []);
+  }, [setResList]);
 
   const columnHeader = resList.length > 0 ? Object.keys(resList[0]) : [];
 
