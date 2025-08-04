@@ -22,6 +22,7 @@ export default function Search({
         <option value="contact">Contact</option>
       </select>
       <input
+        name="inputText"
         className="input-text"
         type="text"
         value={searchText}

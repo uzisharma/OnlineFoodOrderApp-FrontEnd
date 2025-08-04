@@ -39,6 +39,7 @@ export default function RestaurantList() {
         title={"Restaurants"}
         resList={filteredList.length > 0 || searchText ? filteredList : resList}
         setResList={setResList}
+        url={"http://localhost:8080/restaurant/api/getByPage"}
       />
     </div>
   );

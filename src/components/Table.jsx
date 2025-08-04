@@ -1,17 +1,18 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./Table.style.css";
+import PageNavigation from "./PageNavigation";
 
-export default function Table({ resList, setResList, title }) {
-
+export default function Table({ resList, setResList, title, url }) {
+  const [received, setReceived] = useState({});
+  const [baseUrl, setBaseUrl] = useState(url);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:8080/restaurant/api/getAll"
-        );
+        const response = await fetch(baseUrl);
         const data = await response.json();
-        setResList(data.data);
+        setReceived(data.data);
+        setResList(data.data.content);
         console.log(data);
       } catch (error) {
         console.log(
@@ -21,18 +22,19 @@ export default function Table({ resList, setResList, title }) {
       }
     };
     fetchData();
-  }, [setResList]);
+  }, [setResList, baseUrl]);
 
-  const columnHeader = resList.length > 0 ? Object.keys(resList[0]) : [];
+  const safeResList = Array.isArray(resList) ? resList : [];
+  const columnHeader = resList.length > 0 ? Object.keys(safeResList[0]) : [];
 
   // Utility function to capitalize first letter
   const formatHeader = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
   return (
     <div className="table-container">
-      <div className="header-container">
+      <header>
         <h1>{title}</h1>
-      </div>
+      </header>
       <table>
         <thead>
           <tr>
@@ -43,7 +45,7 @@ export default function Table({ resList, setResList, title }) {
           </tr>
         </thead>
         <tbody>
-          {resList.map((row, index) => (
+          {safeResList.map((row, index) => (
             <tr key={index}>
               {columnHeader.map((colName) => (
                 <td key={colName}>{row[colName]}</td>
@@ -52,6 +54,12 @@ export default function Table({ resList, setResList, title }) {
           ))}
         </tbody>
       </table>
+      <div className="page-nav-container">
+        <PageNavigation
+          totalPages={received.totalPages}
+          setBaseUrl={setBaseUrl}
+        />
+      </div>
     </div>
   );
 }
