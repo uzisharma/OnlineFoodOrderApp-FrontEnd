@@ -19,19 +19,23 @@ table {
   font-size: 0.9em;
   background-color: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  table-layout: fixed;
 }
 th,
 td {
   padding: 8px;
   border: 1px solid #ccc;
   text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 th {
   background-color: #f2f2f2;
 }
 
 .page-nav-container{
-  position: relative;
-  right: -420px;
-  margin-top: 20px;
+  margin: 20px 150px 0 0;
+  align-self: flex-end;
+
 }
