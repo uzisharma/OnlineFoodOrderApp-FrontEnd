@@ -29,7 +29,6 @@ export default function RestaurantList() {
   };
 
   const handleClick = (row) => {
-    console.log(row);
     navigate(`/restaurant-details/${row.id}`, { state: { row } });
   };
 

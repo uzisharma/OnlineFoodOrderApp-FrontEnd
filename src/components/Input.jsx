@@ -1,6 +1,12 @@
 import "./Input.css";
 
-export default function Input({ type = "text", placeholder, name, changeFun }) {
+export default function Input({
+  type = "text",
+  placeholder,
+  name,
+  changeFun,
+  value,
+}) {
   const textChange = (e) => {
     changeFun(e.target.value);
   };
@@ -13,6 +19,7 @@ export default function Input({ type = "text", placeholder, name, changeFun }) {
         name={name}
         id={name}
         onChange={textChange}
+        value={value}
         required
       />
     </div>

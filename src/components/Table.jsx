@@ -62,7 +62,7 @@ export default function Table({
                 const cell = row[colName];
 
                 if (typeof cell === "object" && cell !== null) {
-                  return <></>;
+                  return;
                 }
 
                 return <td key={colName}>{cell ?? "N/A"}</td>;
@@ -70,7 +70,7 @@ export default function Table({
               <td key={index}>
                 <Button label={"Edit"} onClick={() => handleClick(row)} />
               </td>
-              <td key={index}>
+              <td key={index + 1}>
                 <Button label={"Delete"} onClick={() => handleClick(row)} />
               </td>
             </tr>
