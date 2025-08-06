@@ -19,16 +19,9 @@ export default function Input({ type = "text", placeholder, name, changeFun }) {
   );
 }
 
-export function Button({ type = "submit", label }) {
-  function handleClick() {
-    // if (type != "submit" || type != "reset") {
-    //   console.log("hello world");
-    // }
-    console.log("h");
-  }
-
+export function Button({ type = "submit", label, onClick }) {
   return (
-    <button type={type} onClick={handleClick}>
+    <button type={type} onClick={onClick}>
       {label}
     </button>
   );

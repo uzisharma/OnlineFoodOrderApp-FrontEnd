@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
 import "./Table.style.css";
 import PageNavigation from "./PageNavigation";
+import { Button } from "./Input";
 
-export default function Table({ resList, setResList, title, url }) {
+export default function Table({
+  resList,
+  setResList,
+  title,
+  url,
+  handleClick,
+}) {
   const [received, setReceived] = useState({});
   const [baseUrl, setBaseUrl] = useState(url);
 
@@ -38,18 +45,34 @@ export default function Table({ resList, setResList, title, url }) {
       <table>
         <thead>
           <tr>
-            {columnHeader.map((colName) => (
-              <th key={colName}>{formatHeader(colName)}</th>
-            ))}
-            {}
+            {columnHeader.map(
+              (colName) =>
+                formatHeader(colName) !== "Food" && (
+                  <th key={colName}>{formatHeader(colName)}</th>
+                )
+            )}
+            <th>Edit</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
           {safeResList.map((row, index) => (
             <tr key={index}>
-              {columnHeader.map((colName) => (
-                <td key={colName}>{row[colName]}</td>
-              ))}
+              {columnHeader.map((colName) => {
+                const cell = row[colName];
+
+                if (typeof cell === "object" && cell !== null) {
+                  return <></>;
+                }
+
+                return <td key={colName}>{cell ?? "N/A"}</td>;
+              })}
+              <td key={index}>
+                <Button label={"Edit"} onClick={() => handleClick(row)} />
+              </td>
+              <td key={index}>
+                <Button label={"Delete"} onClick={() => handleClick(row)} />
+              </td>
             </tr>
           ))}
         </tbody>
