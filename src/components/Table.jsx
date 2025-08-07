@@ -34,6 +34,8 @@ export default function Table({
   const safeResList = Array.isArray(resList) ? resList : [];
   const columnHeader = resList.length > 0 ? Object.keys(safeResList[0]) : [];
 
+  console.log(columnHeader);
+
   // Utility function to capitalize first letter
   const formatHeader = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 

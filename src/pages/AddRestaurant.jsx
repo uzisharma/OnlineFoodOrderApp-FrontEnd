@@ -1,20 +1,15 @@
-import Input, { Button } from "../components/Input";
-import { useState } from "react";
-import "./AddRestaurant.css";
+import Form from "../components/Form";
+import { useNavigate } from "react-router";
 
 export default function AddRestaurant() {
-  const [name, setName] = useState();
-  const [email, setEmail] = useState("");
-  const [contact, setContact] = useState("");
-  const [address, setAddress] = useState("");
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const navigate = useNavigate();
 
+  const handleSubmit = async (formData) => {
     const restaurantData = {
-      restaurantName: name,
-      email,
-      contactNumber: contact,
-      address,
+      restaurantName: formData.restaurantName,
+      email: formData.email,
+      contactNumber: formData.contactNumber,
+      address: formData.address,
     };
 
     try {
@@ -32,13 +27,7 @@ export default function AddRestaurant() {
       if (response.ok) {
         const result = await response.json();
         console.log("Restaurant saved:", result);
-
-        // Reset form state
-        setName("");
-        setEmail("");
-        setContact("");
-        setAddress("");
-        e.target.reset(); // Reset the form inputs (good for uncontrolled components)
+        navigate("/listRestaurant"); // redirect to list page after successful add
       } else {
         console.error("Error saving restaurant:", response.status);
       }
@@ -47,44 +36,21 @@ export default function AddRestaurant() {
     }
   };
 
+  const initialData = {
+    restaurantName: "",
+    email: "",
+    contactNumber: "",
+    address: "",
+  };
+
   return (
     <>
       <title>Add Restaurant</title>
-      <div className="wrapper">
-        <div className="form-container">
-          <h1>Add Restaurant</h1>
-          <form onSubmit={handleSubmit} method="post">
-            <Input
-              type="text"
-              placeholder="Restaurant Name"
-              name="restaurantName"
-              changeFun={setName}
-            />
-            <Input
-              type="text"
-              placeholder="Email"
-              name="email"
-              changeFun={setEmail}
-            />
-            <Input
-              type="number"
-              placeholder="Contact"
-              name="contactNumber"
-              changeFun={setContact}
-            />
-            <Input
-              type="text"
-              placeholder="Address"
-              name="address"
-              changeFun={setAddress}
-            />
-            <div className="button-container">
-              <Button label="Submit" />
-              <Button type="reset" label="Reset" />
-            </div>
-          </form>
-        </div>
-      </div>
+      <Form
+        heading="Add Restaurant"
+        onSubmit={handleSubmit}
+        initialData={initialData}
+      />
     </>
   );
 }

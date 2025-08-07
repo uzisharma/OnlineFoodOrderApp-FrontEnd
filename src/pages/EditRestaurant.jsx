@@ -8,11 +8,13 @@ export default function EditRestaurant() {
 
   const handleSubmit = (updatedData) => {
     console.log("Updated restaurant data:", updatedData);
+
     // You can send this data to your backend via PUT here
   };
 
   return (
     <>
+      <title>Edit Restaurant</title>
       {row ? (
         <Form
           heading={"Edit Restaurant"}

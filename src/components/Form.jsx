@@ -1,9 +1,12 @@
 import { useState } from "react";
 import Input from "./Input";
 import { useNavigate } from "react-router";
+import FoodSelector from "./FoodSelector";
+import "./Form.css";
 
 export default function Form({ heading, onSubmit, initialData = {} }) {
   const [formData, setFormData] = useState(initialData);
+  const [showFoodSelector, setShowFoodSelector] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (key, value) => {
@@ -14,20 +17,37 @@ export default function Form({ heading, onSubmit, initialData = {} }) {
     e.preventDefault();
     onSubmit(formData);
   };
+
   const cancelHandler = () => {
     navigate("/listRestaurant");
   };
 
+  const handleFoodUpdate = (updatedFoodIds) => {
+    setFormData((prev) => ({ ...prev, food: updatedFoodIds }));
+  };
+
   return (
-    <>
+    <div className="form-layout">
       <div className="wrapper">
         <div className="form-container">
           <h3>{heading}</h3>
           <form onSubmit={handleSubmit}>
             {Object.entries(formData).map(([key, value]) => {
-              if (typeof value === "object") return null; // skip objects like `food`
               if (key === "id" || key === "createdAt" || key === "updatedAt")
                 return null;
+
+              if (typeof value === "object") {
+                return (
+                  <div key={key}>
+                    <button
+                      type="button"
+                      onClick={() => setShowFoodSelector(!showFoodSelector)}
+                    >
+                      {showFoodSelector ? "Hide" : "Assign Food"}
+                    </button>
+                  </div>
+                );
+              }
 
               return (
                 <Input
@@ -42,11 +62,22 @@ export default function Form({ heading, onSubmit, initialData = {} }) {
             })}
             <div className="button-container">
               <button type="submit">Submit</button>
-              <button onClick={cancelHandler}>Cancel</button>
+              <button type="button" onClick={cancelHandler}>
+                Cancel
+              </button>
             </div>
           </form>
         </div>
       </div>
-    </>
+
+      {showFoodSelector && (
+        <div className="food-panel">
+          <FoodSelector
+            selectedFood={formData.food || []}
+            onUpdate={handleFoodUpdate}
+          />
+        </div>
+      )}
+    </div>
   );
 }
