@@ -1,0 +1,7 @@
+.edit-container {
+  display: flex;
+  justify-content: center;
+}
+.edit-obj {
+  background-color: red;
+}

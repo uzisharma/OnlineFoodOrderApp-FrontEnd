@@ -1,0 +1,47 @@
+.num-disp {
+  background-color: blue;
+  color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin: 0 5px;
+  font-size: 10px;
+  border: none;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  display: inline-flex;
+  padding: 0;
+}
+
+.num-disp.active {
+  background-color: deepskyblue;
+  font-weight: bold;
+}
+
+.arrow-disp {
+  background-color: blue;
+  color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin: 0 5px;
+  font-size: 10px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow-disp:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ellipsis {
+  margin: 0 10px;
+  font-weight: bold;
+  color: #444;
+}
