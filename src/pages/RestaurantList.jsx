@@ -12,6 +12,8 @@ export default function RestaurantList() {
 
   const navigate = useNavigate();
 
+  const editResUrl = "http://localhost:8080/restaurant/api/update?id=";
+
   const handleSearch = () => {
     const query = searchText;
 
@@ -29,7 +31,7 @@ export default function RestaurantList() {
   };
 
   const handleClick = (row) => {
-    navigate(`/restaurant-details/${row.id}`, { state: { row } });
+    navigate(`/restaurant-details/${row.id}`, { state: { row, editResUrl } });
   };
 
   return (

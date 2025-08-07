@@ -1,12 +1,12 @@
 import { useState } from "react";
-import Input from "./Input";
+import Input, { Button } from "./Input";
 import { useNavigate } from "react-router";
 import FoodSelector from "./FoodSelector";
 import "./Form.css";
 
 export default function Form({ heading, onSubmit, initialData = {} }) {
   const [formData, setFormData] = useState(initialData);
-  const [showFoodSelector, setShowFoodSelector] = useState(false);
+  // const [showFoodSelector, setShowFoodSelector] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (key, value) => {
@@ -22,10 +22,6 @@ export default function Form({ heading, onSubmit, initialData = {} }) {
     navigate("/listRestaurant");
   };
 
-  const handleFoodUpdate = (updatedFoodIds) => {
-    setFormData((prev) => ({ ...prev, food: updatedFoodIds }));
-  };
-
   return (
     <div className="form-layout">
       <div className="wrapper">
@@ -38,14 +34,12 @@ export default function Form({ heading, onSubmit, initialData = {} }) {
 
               if (typeof value === "object") {
                 return (
-                  <div key={key}>
-                    <button
-                      type="button"
-                      onClick={() => setShowFoodSelector(!showFoodSelector)}
-                    >
-                      {showFoodSelector ? "Hide" : "Assign Food"}
-                    </button>
-                  </div>
+                  <Button
+                    label={"Assign " + key}
+                    key={key}
+                    type="button"
+                    onClick={() => console.log(formData)}
+                  />
                 );
               }
 
@@ -69,15 +63,6 @@ export default function Form({ heading, onSubmit, initialData = {} }) {
           </form>
         </div>
       </div>
-
-      {showFoodSelector && (
-        <div className="food-panel">
-          <FoodSelector
-            selectedFood={formData.food || []}
-            onUpdate={handleFoodUpdate}
-          />
-        </div>
-      )}
     </div>
   );
 }
