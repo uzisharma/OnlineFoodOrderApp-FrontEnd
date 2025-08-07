@@ -1,10 +1,9 @@
 import { useState } from "react";
 import Input, { Button } from "./Input";
 import { useNavigate } from "react-router";
-import FoodSelector from "./FoodSelector";
-import "./Form.css";
+import "./style/Form.css";
 
-export default function Form({ heading, onSubmit, initialData = {} }) {
+export default function Form({ heading, onSubmit, onClick, initialData = {} }) {
   const [formData, setFormData] = useState(initialData);
   // const [showFoodSelector, setShowFoodSelector] = useState(false);
   const navigate = useNavigate();
@@ -38,7 +37,7 @@ export default function Form({ heading, onSubmit, initialData = {} }) {
                     label={"Assign " + key}
                     key={key}
                     type="button"
-                    onClick={() => console.log(formData)}
+                    onClick={() => onClick(formData)}
                   />
                 );
               }

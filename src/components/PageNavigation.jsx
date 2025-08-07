@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./PageNavigation.css";
+import "./style/PageNavigation.css";
 
 export default function PageNavigation({ totalPages, setBaseUrl }) {
   const [currentPage, setCurrentPage] = useState(1);

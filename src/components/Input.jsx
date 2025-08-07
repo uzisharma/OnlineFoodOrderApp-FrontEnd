@@ -1,4 +1,4 @@
-import "./Input.css";
+import "./style/Input.css";
 
 export default function Input({
   type = "text",

@@ -1,5 +1,5 @@
 import React from "react";
-import "./Search.style.css";
+import "./style/Search.style.css";
 
 export default function Search({
   selectedOption,

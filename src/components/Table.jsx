@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./Table.style.css";
+import "./style/Table.style.css";
 import PageNavigation from "./PageNavigation";
 import { Button } from "./Input";
 

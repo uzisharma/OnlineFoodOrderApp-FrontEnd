@@ -1,7 +1,10 @@
 import { useLocation, useParams } from "react-router";
+import { useState } from "react";
 import Form from "../components/Form";
+import "./style/EditRestaurant.css";
 
 export default function EditRestaurant() {
+  const [isObject, setIsObject] = useState(false);
   const { id } = useParams();
   const location = useLocation();
   const row = location.state?.row;
@@ -32,18 +35,27 @@ export default function EditRestaurant() {
       });
   };
 
+  const handleOnClick = (formData) => {
+    const innerObj = formData?.food;
+    const newOrd = [...innerObj];
+    console.log(newOrd);
+    setIsObject(true);
+  };
+
   return (
-    <>
+    <div className="edit-container">
       <title>Edit Restaurant</title>
       {row ? (
         <Form
           heading={"Edit Restaurant"}
           onSubmit={handleSubmit}
           initialData={row}
+          onClick={handleOnClick}
         />
       ) : (
         <p>No data found</p>
       )}
-    </>
+      {isObject && <div className="edit-obj">hello</div>}
+    </div>
   );
 }

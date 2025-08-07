@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import Table from "../components/Table";
 import Search from "../components/Search";
-import "./RestaurantList.css";
+import "./style/RestaurantList.css";
 
 export default function RestaurantList() {
   const [resList, setResList] = useState([]); //full list from api
