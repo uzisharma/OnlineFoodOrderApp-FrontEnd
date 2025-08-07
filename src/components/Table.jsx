@@ -34,8 +34,6 @@ export default function Table({
   const safeResList = Array.isArray(resList) ? resList : [];
   const columnHeader = resList.length > 0 ? Object.keys(safeResList[0]) : [];
 
-  console.log(columnHeader);
-
   // Utility function to capitalize first letter
   const formatHeader = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
@@ -47,12 +45,9 @@ export default function Table({
       <table>
         <thead>
           <tr>
-            {columnHeader.map(
-              (colName) =>
-                formatHeader(colName) !== "Food" && (
-                  <th key={colName}>{formatHeader(colName)}</th>
-                )
-            )}
+            {columnHeader.map((colName) => (
+              <th key={colName}>{formatHeader(colName)}</th>
+            ))}
             <th>Edit</th>
             <th>Delete</th>
           </tr>
@@ -64,7 +59,11 @@ export default function Table({
                 const cell = row[colName];
 
                 if (typeof cell === "object" && cell !== null) {
-                  return;
+                  return (
+                    <td key={colName}>
+                      <Button label={colName} />
+                    </td>
+                  );
                 }
 
                 return <td key={colName}>{cell ?? "N/A"}</td>;
