@@ -8,7 +8,8 @@ export default function Table({
   setResList,
   title,
   url,
-  handleClick,
+  handleNavigate,
+  onClick,
 }) {
   const [received, setReceived] = useState({});
   const [baseUrl, setBaseUrl] = useState(url);
@@ -61,7 +62,10 @@ export default function Table({
                 if (typeof cell === "object" && cell !== null) {
                   return (
                     <td key={colName}>
-                      <Button label={colName} />
+                      <Button
+                        label={colName}
+                        onClick={() => onClick(row, colName)}
+                      />
                     </td>
                   );
                 }
@@ -69,10 +73,10 @@ export default function Table({
                 return <td key={colName}>{cell ?? "N/A"}</td>;
               })}
               <td key={index}>
-                <Button label={"Edit"} onClick={() => handleClick(row)} />
+                <Button label={"Edit"} onClick={() => handleNavigate(row)} />
               </td>
               <td key={index + 1}>
-                <Button label={"Delete"} onClick={() => handleClick(row)} />
+                <Button label={"Delete"} onClick={() => handleNavigate(row)} />
               </td>
             </tr>
           ))}

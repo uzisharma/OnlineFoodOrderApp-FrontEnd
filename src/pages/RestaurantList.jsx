@@ -3,16 +3,18 @@ import { useNavigate } from "react-router";
 import Table from "../components/Table";
 import Search from "../components/Search";
 import "./style/RestaurantList.css";
+import Modal from "../components/Modal";
 
 export default function RestaurantList() {
   const [resList, setResList] = useState([]); //full list from api
   const [filteredList, setFilteredList] = useState([]); //filtered list to display
   const [selectedOption, setSelectedOption] = useState("id");
   const [searchText, setSearchText] = useState("");
+  const [isModalOpen, setIsMoalOpen] = useState(false);
+  const [content, setContent] = useState([]);
 
   const navigate = useNavigate();
 
-  // const editResUrl = "http://localhost:8080/restaurant/api/update?id=";
   const editResUrl = "http://localhost:8080/api/restaurant/update?id=";
 
   const handleSearch = () => {
@@ -31,8 +33,15 @@ export default function RestaurantList() {
     setFilteredList(filtered);
   };
 
-  const handleClick = (row) => {
+  const handleNavigate = (row) => {
     navigate(`/restaurant-details/${row.id}`, { state: { row, editResUrl } });
+  };
+
+  const handleClick = (row, colName) => {
+    console.log(row?.id);
+    console.log(colName);
+    setContent(row[colName]);
+    setIsMoalOpen(true);
   };
 
   return (
@@ -50,7 +59,15 @@ export default function RestaurantList() {
         resList={filteredList.length > 0 || searchText ? filteredList : resList}
         setResList={setResList}
         url={"http://localhost:8080/api/restaurant/getByPage"}
-        handleClick={handleClick}
+        handleNavigate={handleNavigate}
+        onClick={handleClick}
+      />
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsMoalOpen(false)}
+        title={"Edit Restaurant"}
+        content={content}
+        url={"http://localhost:8080/api/food/getAll"}
       />
     </div>
   );
