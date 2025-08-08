@@ -1,4 +1,4 @@
-.modal-overlay {
+.status-modal-overlay {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.6);
@@ -7,7 +7,7 @@
   align-items: center;
 }
 
-.modal-content {
+.status-modal-content {
   background: white;
   padding: 1.5rem;
   border-radius: 8px;
@@ -15,14 +15,14 @@
   text-align: center;
 }
 
-.modal-content.success {
+.status-modal-content.success {
   border: 2px solid green;
 }
 
-.modal-content.error {
+.status-modal-content.error {
   border: 2px solid red;
 }
 
-.modal-content button {
+.status-modal-content button {
   margin-top: 1rem;
 }
