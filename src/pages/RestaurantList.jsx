@@ -12,10 +12,12 @@ export default function RestaurantList() {
   const [searchText, setSearchText] = useState("");
   const [isModalOpen, setIsMoalOpen] = useState(false);
   const [content, setContent] = useState([]);
+  const [updateUrl, setUpdateUrl] = useState("");
 
   const navigate = useNavigate();
 
   const editResUrl = "http://localhost:8080/api/restaurant/update?id=";
+  const editFoodListUrl = "http://localhost:8080/api/restaurant";
 
   const handleSearch = () => {
     const query = searchText;
@@ -41,7 +43,32 @@ export default function RestaurantList() {
     console.log(row?.id);
     console.log(colName);
     setContent(row[colName]);
+    setUpdateUrl(`${editFoodListUrl}/${row?.id}/assign`);
     setIsMoalOpen(true);
+  };
+
+  const saveList = (selectedId) => {
+    console.log(selectedId);
+    console.log(updateUrl);
+    fetch(updateUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(selectedId),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to update");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Update Successfull", data);
+      })
+      .catch((error) => {
+        console.error("Failed", error);
+      });
   };
 
   return (
@@ -66,6 +93,7 @@ export default function RestaurantList() {
         isOpen={isModalOpen}
         onClose={() => setIsMoalOpen(false)}
         title={"Edit Restaurant"}
+        saveList={saveList}
         content={content}
         url={"http://localhost:8080/api/food/getAll"}
       />

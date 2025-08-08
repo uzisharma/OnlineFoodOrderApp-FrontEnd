@@ -1,8 +1,24 @@
 import { useEffect, useState } from "react";
 import "./style/Modal.css";
+import { Button } from "./Input";
 
-export default function Modal({ isOpen, onClose, title, content, url }) {
-  const [data, setData] = useState([]);
+export default function Modal({
+  isOpen,
+  onClose,
+  title,
+  saveList,
+  content,
+  url,
+}) {
+  const [allItems, setAllItems] = useState([]);
+  const [selectedIds, setSelectedIds] = useState([]);
+
+  // Preselect IDs from the content prop
+  useEffect(() => {
+    setSelectedIds(content.map((food) => food.id));
+  }, [content]);
+
+  // Fetch API data and merge with content without losing API results
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -11,17 +27,33 @@ export default function Modal({ isOpen, onClose, title, content, url }) {
             "Content-Type": "application/json",
           },
         });
-        const data = await res.json();
-        console.log(data);
-        setData(data?.data?.content);
+        const result = await res.json();
+        const fetchedItems = result?.data?.content || [];
+
+        // Merge API + content without duplicates
+        const merged = [
+          ...content,
+          ...fetchedItems.filter(
+            (apiItem) => !content.some((c) => c.id === apiItem.id)
+          ),
+        ];
+
+        setAllItems(merged);
       } catch (error) {
         console.error("failed to fetch data", error);
       }
     };
     fetchData();
-  }, [url]);
+  }, [url, content]);
 
-  if (!isOpen) return null; // Don't render if closed
+  if (!isOpen) return null;
+
+  const toggleSelect = (id) => {
+    setSelectedIds((prev) =>
+      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
+    );
+  };
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -32,17 +64,20 @@ export default function Modal({ isOpen, onClose, title, content, url }) {
           </button>
         </header>
         <div className="modal-body">
-          <ul>
-            {content.map((food) => (
-              <li key={food.id}>{food.foodName}</li>
-            ))}
-          </ul>
-          <ol>
-            {data.map((ele) => (
-              <li key={ele.id}>{ele.foodName}</li>
-            ))}
-          </ol>
+          {allItems.map((food) => (
+            <div key={food.id} className="checkbox-item">
+              <label>
+                <input
+                  type="checkbox"
+                  checked={selectedIds.includes(food.id)}
+                  onChange={() => toggleSelect(food.id)}
+                />
+                {food.foodName}
+              </label>
+            </div>
+          ))}
         </div>
+        <Button onClick={() => saveList(selectedIds)} label={"Save Changes"} />
       </div>
     </div>
   );
