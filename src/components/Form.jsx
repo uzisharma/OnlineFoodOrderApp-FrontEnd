@@ -3,7 +3,7 @@ import Input, { Button } from "./Input";
 import { useNavigate } from "react-router";
 import "./style/Form.css";
 
-export default function Form({ heading, onSubmit, onClick, initialData = {} }) {
+export default function Form({ heading, onSubmit, initialData = {} }) {
   const [formData, setFormData] = useState(initialData);
   // const [showFoodSelector, setShowFoodSelector] = useState(false);
   const navigate = useNavigate();
@@ -32,14 +32,7 @@ export default function Form({ heading, onSubmit, onClick, initialData = {} }) {
                 return null;
 
               if (typeof value === "object") {
-                return (
-                  <Button
-                    label={"Assign " + key}
-                    key={key}
-                    type="button"
-                    onClick={() => onClick(formData[key])}
-                  />
-                );
+                return;
               }
 
               return (
