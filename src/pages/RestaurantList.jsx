@@ -53,7 +53,7 @@ const handleDelete = (row) => {
   fetch(delUrl, {
     method: "DELETE",
     headers: {
-      "Content-Type": "application/json", // fixed spelling
+      "Content-Type": "application/json",
     },
   })
     .then((res) => {
@@ -64,8 +64,10 @@ const handleDelete = (row) => {
         // Remove the deleted item from the state immediately
         setResList((prev) => prev.filter((item) => item.id !== row.id));
         setFilteredList((prev) => prev.filter((item) => item.id !== row.id));
-
-        setStatusModalMsg(`${row?.id} deleted Successfully`);
+        console.log(row);
+        setStatusModalMsg(
+          `${row?.restaurantName} restaurant deleted Successfully`
+        );
         setStatusModalType("success");
         setIsStatusModalOpen(true);
         return null;
@@ -73,7 +75,9 @@ const handleDelete = (row) => {
       return res.json();
     })
     .catch((error) => {
-      setStatusModalMsg(`${row?.id} Unsuccessful`);
+      setStatusModalMsg(
+        `${row?.restaurantName} restaurant deletion Unsuccessful`
+      );
       setStatusModalType("error");
       setIsStatusModalOpen(true);
       console.error("Failed to delete", error);
