@@ -4,6 +4,7 @@ import Table from "../components/Table";
 import Search from "../components/Search";
 import "./style/RestaurantList.css";
 import Modal from "../components/Modal";
+import StatusModal from "../components/StatusModal";
 
 export default function RestaurantList() {
   const [resList, setResList] = useState([]); //full list from api
@@ -15,6 +16,11 @@ export default function RestaurantList() {
   const [updateUrl, setUpdateUrl] = useState("");
   const [modalTitle, setModalTitle] = useState("");
   const [modalUrl, setModalUrl] = useState("");
+
+  //Status Modal Control
+  const [isStatusModalOpen, setIsStatusModalOpen] = useState(false);
+  const [statusModalMsg, setStatusModalMsg] = useState("");
+  const [statusModalType, setStatusModalType] = useState("success");
 
   const navigate = useNavigate();
 
@@ -43,6 +49,14 @@ export default function RestaurantList() {
     navigate(`/restaurant-details/${row.id}`, { state: { row, editResUrl } });
   };
 
+  const handleOnClose = () => {
+    setIsStatusModalOpen(false);
+    if (statusModalType === "success") {
+      // navigate(-1);
+      setIsMoalOpen(false);
+    }
+  };
+
   const handleClick = (row, colName) => {
     setContent(row[colName]);
     setModalTitle(colName);
@@ -69,9 +83,15 @@ export default function RestaurantList() {
       })
       .then((data) => {
         console.log("Update Successfull", data);
+        setStatusModalMsg(`${modalTitle} list updated Successfully`);
+        setStatusModalType("success");
+        setIsStatusModalOpen(true);
       })
       .catch((error) => {
         console.error("Failed", error);
+        setStatusModalMsg(`Failed to updated ${modalTitle} list`);
+        setStatusModalType("error");
+        setIsStatusModalOpen(true);
       });
   };
 
@@ -100,6 +120,12 @@ export default function RestaurantList() {
         saveList={saveList}
         content={content}
         url={modalUrl}
+      />
+      <StatusModal
+        isOpen={isStatusModalOpen}
+        type={statusModalType}
+        message={statusModalMsg}
+        onClose={handleOnClose}
       />
     </div>
   );

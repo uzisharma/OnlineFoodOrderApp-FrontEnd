@@ -1,4 +1,4 @@
-import { useLocation, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import { useState } from "react";
 import Form from "../components/Form";
 import "./style/EditRestaurant.css";
@@ -9,11 +9,12 @@ export default function EditRestaurant() {
   const location = useLocation();
   const row = location.state?.row;
   const url = location.state?.editResUrl;
+  const navigate = useNavigate();
 
-  // Modal control state
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalMessage, setModalMessage] = useState("");
-  const [modalType, setModalType] = useState("success"); // success | error
+  //Status Modal Control
+  const [isStatusModalOpen, setIsStatusModalOpen] = useState(false);
+  const [statusModalMsg, setStatusModalMsg] = useState("");
+  const [statusModalType, setStatusModalType] = useState("success");
 
   const handleSubmit = (updatedData) => {
     const updatedUrl = `${url}${id}`; // make sure there's a slash if needed
@@ -33,16 +34,23 @@ export default function EditRestaurant() {
       })
       .then((data) => {
         console.log("Update Success", data);
-        setModalMessage("Restaurant updated successfully!");
-        setModalType("success");
-        setIsModalOpen(true);
+        setStatusModalMsg("Restaurant updated successfully!");
+        setStatusModalType("success");
+        setIsStatusModalOpen(true);
       })
       .catch((error) => {
         console.error("Update error", error);
-        setModalMessage("Failed to update restaurant.");
-        setModalType("error");
-        setIsModalOpen(true);
+        setStatusModalMsg("Failed to update restaurant.");
+        setStatusModalType("error");
+        setIsStatusModalOpen(true);
       });
+  };
+
+  const handleOnClose = () => {
+    console.log(statusModalType);
+    if (statusModalType === "success") {
+      navigate(-1);
+    }
   };
 
   return (
@@ -60,10 +68,10 @@ export default function EditRestaurant() {
         )}
       </div>
       <StatusModal
-        isOpen={isModalOpen}
-        type={modalType}
-        message={modalMessage}
-        onClose={() => setIsModalOpen(false)}
+        isOpen={isStatusModalOpen}
+        type={statusModalType}
+        message={statusModalMsg}
+        onClose={handleOnClose}
       />
     </>
   );
