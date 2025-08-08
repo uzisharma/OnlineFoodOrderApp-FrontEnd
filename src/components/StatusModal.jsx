@@ -1,7 +1,7 @@
 import React from "react";
-import "./style/Modal.css";
+import "./style/StatusModal.css";
 
-export default function Modal({ isOpen, onClose, type, message }) {
+export default function StatusModal({ isOpen, onClose, type, message }) {
   if (!isOpen) return null;
 
   return (
