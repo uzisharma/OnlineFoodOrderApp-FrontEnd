@@ -8,7 +8,7 @@ export default function PageNavigation({ totalPages, setBaseUrl }) {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
       setBaseUrl(
-        "http://localhost:8080/restaurant/api/getByPage?pageNum=" + (page - 1)
+        "http://localhost:8080/api/restaurant/getByPage?pageNum=" + (page - 1)
       );
     }
   };

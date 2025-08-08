@@ -37,7 +37,7 @@ export default function Form({ heading, onSubmit, onClick, initialData = {} }) {
                     label={"Assign " + key}
                     key={key}
                     type="button"
-                    onClick={() => onClick(formData)}
+                    onClick={() => onClick(formData[key])}
                   />
                 );
               }

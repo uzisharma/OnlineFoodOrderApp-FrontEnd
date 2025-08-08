@@ -12,7 +12,8 @@ export default function RestaurantList() {
 
   const navigate = useNavigate();
 
-  const editResUrl = "http://localhost:8080/restaurant/api/update?id=";
+  // const editResUrl = "http://localhost:8080/restaurant/api/update?id=";
+  const editResUrl = "http://localhost:8080/api/restaurant/update?id=";
 
   const handleSearch = () => {
     const query = searchText;
@@ -48,7 +49,7 @@ export default function RestaurantList() {
         title={"Restaurants"}
         resList={filteredList.length > 0 || searchText ? filteredList : resList}
         setResList={setResList}
-        url={"http://localhost:8080/restaurant/api/getByPage"}
+        url={"http://localhost:8080/api/restaurant/getByPage"}
         handleClick={handleClick}
       />
     </div>
