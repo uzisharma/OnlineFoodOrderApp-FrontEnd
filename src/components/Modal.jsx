@@ -15,7 +15,7 @@ export default function Modal({
 
   // Preselect IDs from the content prop
   useEffect(() => {
-    setSelectedIds(content.map((food) => food.id));
+    setSelectedIds(content.map((ele) => ele.id));
   }, [content]);
 
   // Fetch API data and merge with content without losing API results
@@ -64,15 +64,15 @@ export default function Modal({
           </button>
         </header>
         <div className="modal-body">
-          {allItems.map((food) => (
-            <div key={food.id} className="checkbox-item">
+          {allItems.map((ele) => (
+            <div key={ele.id} className="checkbox-item">
               <label>
                 <input
                   type="checkbox"
-                  checked={selectedIds.includes(food.id)}
-                  onChange={() => toggleSelect(food.id)}
+                  checked={selectedIds.includes(ele.id)}
+                  onChange={() => toggleSelect(ele.id)}
                 />
-                {food.foodName}
+                {ele[`${title}Name`]}
               </label>
             </div>
           ))}

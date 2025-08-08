@@ -13,11 +13,15 @@ export default function RestaurantList() {
   const [isModalOpen, setIsMoalOpen] = useState(false);
   const [content, setContent] = useState([]);
   const [updateUrl, setUpdateUrl] = useState("");
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalUrl, setModalUrl] = useState("");
 
   const navigate = useNavigate();
 
   const editResUrl = "http://localhost:8080/api/restaurant/update?id=";
-  const editFoodListUrl = "http://localhost:8080/api/restaurant";
+  const resBaseUrl = "http://localhost:8080/api/restaurant";
+  // const foodBaseUrl = "http://localhost:8080/api/food";
+  const baseUrl = "http://localhost:8080/api";
 
   const handleSearch = () => {
     const query = searchText;
@@ -40,10 +44,10 @@ export default function RestaurantList() {
   };
 
   const handleClick = (row, colName) => {
-    console.log(row?.id);
-    console.log(colName);
     setContent(row[colName]);
-    setUpdateUrl(`${editFoodListUrl}/${row?.id}/assign`);
+    setModalTitle(colName);
+    setUpdateUrl(`${resBaseUrl}/${row?.id}/assign`);
+    setModalUrl(`${baseUrl}/${colName}/getAll`);
     setIsMoalOpen(true);
   };
 
@@ -92,10 +96,10 @@ export default function RestaurantList() {
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsMoalOpen(false)}
-        title={"Edit Restaurant"}
+        title={modalTitle}
         saveList={saveList}
         content={content}
-        url={"http://localhost:8080/api/food/getAll"}
+        url={modalUrl}
       />
     </div>
   );
