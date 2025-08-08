@@ -9,6 +9,7 @@ export default function Table({
   title,
   url,
   handleNavigate,
+  handleDelete,
   onClick,
 }) {
   const [received, setReceived] = useState({});
@@ -76,7 +77,7 @@ export default function Table({
                 <Button label={"Edit"} onClick={() => handleNavigate(row)} />
               </td>
               <td key={index + 1}>
-                <Button label={"Delete"} onClick={() => handleNavigate(row)} />
+                <Button label={"Delete"} onClick={() => handleDelete(row)} />
               </td>
             </tr>
           ))}
