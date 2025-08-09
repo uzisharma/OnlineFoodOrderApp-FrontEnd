@@ -144,7 +144,7 @@ return (
       title={"Restaurants"}
       resList={filteredList.length > 0 || searchText ? filteredList : resList}
       setResList={setResList}
-      url={"http://localhost:8080/api/restaurant/getByPage"}
+      url={"http://localhost:8080/api/restaurant/getAll"}
       handleNavigate={handleNavigate}
       handleDelete={handleDelete}
       onClick={handleClick}

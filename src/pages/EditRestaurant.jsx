@@ -2,7 +2,7 @@ import { useLocation, useNavigate, useParams } from "react-router";
 import { useState } from "react";
 import Form from "../components/Form";
 import "./style/EditRestaurant.css";
-import StatusModal from "../components/StatusModal";
+import UnifiedModal from "../components/UnifiedModal"; // ✅ use unified modal
 
 export default function EditRestaurant() {
   const { id } = useParams();
@@ -11,13 +11,13 @@ export default function EditRestaurant() {
   const url = location.state?.editResUrl;
   const navigate = useNavigate();
 
-  //Status Modal Control
-  const [isStatusModalOpen, setIsStatusModalOpen] = useState(false);
-  const [statusModalMsg, setStatusModalMsg] = useState("");
-  const [statusModalType, setStatusModalType] = useState("success");
+  // UnifiedModal Control
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMsg, setModalMsg] = useState("");
+  const [modalType, setModalType] = useState("success"); // success | error
 
   const handleSubmit = (updatedData) => {
-    const updatedUrl = `${url}${id}`; // make sure there's a slash if needed
+    const updatedUrl = `${url}${id}`; // ensure slash in url if required
 
     fetch(updatedUrl, {
       method: "PUT",
@@ -34,23 +34,23 @@ export default function EditRestaurant() {
       })
       .then((data) => {
         console.log("Update Success", data);
-        setStatusModalMsg("Restaurant updated successfully!");
-        setStatusModalType("success");
-        setIsStatusModalOpen(true);
+        setModalMsg("Restaurant updated successfully!");
+        setModalType("success");
+        setIsModalOpen(true);
       })
       .catch((error) => {
         console.error("Update error", error);
-        setStatusModalMsg("Failed to update restaurant.");
-        setStatusModalType("error");
-        setIsStatusModalOpen(true);
+        setModalMsg("Failed to update restaurant.");
+        setModalType("error");
+        setIsModalOpen(true);
       });
   };
 
   const handleOnClose = () => {
-    console.log(statusModalType);
-    if (statusModalType === "success") {
-      navigate(-1);
+    if (modalType === "success") {
+      navigate(-1); // go back after success
     }
+    setIsModalOpen(false); // close modal
   };
 
   return (
@@ -67,11 +67,15 @@ export default function EditRestaurant() {
           <p>No data found</p>
         )}
       </div>
-      <StatusModal
-        isOpen={isStatusModalOpen}
-        type={statusModalType}
-        message={statusModalMsg}
+
+      {/* ✅ Using UnifiedModal in status mode */}
+      <UnifiedModal
+        isOpen={isModalOpen}
         onClose={handleOnClose}
+        mode="status"
+        type={modalType}
+        title={modalType === "success" ? "Success" : "Error"}
+        message={modalMsg}
       />
     </>
   );

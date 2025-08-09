@@ -1,15 +1,14 @@
 import { useState } from "react";
 import "./style/PageNavigation.css";
 
-export default function PageNavigation({ totalPages, setBaseUrl }) {
+export default function PageNavigation({ totalPages, url, setBaseUrl }) {
   const [currentPage, setCurrentPage] = useState(1);
 
   const goToPage = (page) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
-      setBaseUrl(
-        "http://localhost:8080/api/restaurant/getByPage?pageNum=" + (page - 1)
-      );
+
+      setBaseUrl(`${url}?pageNum=` + (page - 1));
     }
   };
 

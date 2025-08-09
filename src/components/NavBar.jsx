@@ -19,6 +19,9 @@ export default function NavBar() {
         <Link className="link-element" to="/listRestaurant">
           View Restaurants
         </Link>
+        <Link className="link-element" to="/listFood">
+          View Food
+        </Link>
       </div>
     </nav>
   );
