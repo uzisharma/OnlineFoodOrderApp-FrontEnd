@@ -17,16 +17,10 @@ export default function UnifiedModal({
   const [selectedIds, setSelectedIds] = useState([]);
   const [isClosing, setIsClosing] = useState(false);
 
-  // Preselection for select mode
-  useEffect(() => {
-    if (mode === "select") {
-      setSelectedIds(content.map((ele) => ele.id));
-    }
-  }, [content, mode]);
-
-  // Fetch & merge in select mode
+  // Fetch data & set preselection in "select" mode
   useEffect(() => {
     if (mode !== "select" || !url) return;
+
     const fetchData = async () => {
       try {
         const res = await fetch(url, {
@@ -34,17 +28,14 @@ export default function UnifiedModal({
         });
         const result = await res.json();
         const fetchedItems = result?.data?.content || [];
-        const merged = [
-          ...content,
-          ...fetchedItems.filter(
-            (apiItem) => !content.some((c) => c.id === apiItem.id)
-          ),
-        ];
-        setAllItems(merged);
+
+        setAllItems(fetchedItems); // ✅ full fresh list
+        setSelectedIds(content.map((ele) => ele.id)); // ✅ preselect after fetch
       } catch (error) {
-        console.error("failed to fetch data", error);
+        console.error("Failed to fetch data", error);
       }
     };
+
     fetchData();
   }, [url, content, mode]);
 
@@ -59,6 +50,7 @@ export default function UnifiedModal({
 
   if (!isOpen && !isClosing) return null;
 
+  // Toggle select/unselect
   const toggleSelect = (id) => {
     setSelectedIds((prev) =>
       prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
@@ -81,6 +73,7 @@ export default function UnifiedModal({
         </header>
 
         <div className="modal-body">
+          {/* SELECT MODE */}
           {mode === "select" &&
             allItems.map((ele) => (
               <div key={ele.id} className="checkbox-item">
@@ -90,14 +83,16 @@ export default function UnifiedModal({
                     checked={selectedIds.includes(ele.id)}
                     onChange={() => toggleSelect(ele.id)}
                   />
-                  {ele[`${title}Name`]}
+                  {ele[`${title}Name`] || ele.name || `Item ${ele.id}`}
                 </label>
               </div>
             ))}
 
+          {/* STATUS MODE */}
           {mode === "status" && <p>{message}</p>}
         </div>
 
+        {/* Footer buttons */}
         {mode === "select" && (
           <Button onClick={() => saveList(selectedIds)} label="Save Changes" />
         )}

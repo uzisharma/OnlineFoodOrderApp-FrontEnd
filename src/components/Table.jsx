@@ -86,7 +86,6 @@ export default function Table({
       <div className="page-nav-container">
         <PageNavigation
           totalPages={received.totalPages}
-          // baseUrl={baseUrl}
           url={url}
           setBaseUrl={setBaseUrl}
         />
