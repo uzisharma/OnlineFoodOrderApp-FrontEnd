@@ -3,21 +3,20 @@ import { useNavigate } from "react-router";
 import Table from "../components/Table";
 import Search from "../components/Search";
 import "./style/RestaurantList.css";
-import UnifiedModal from "../components/UnifiedModal"; // <-- use UnifiedModal instead
+import UnifiedModal from "../components/UnifiedModal";
 
 export default function RestaurantList() {
-  const [resList, setResList] = useState([]);
-  const [filteredList, setFilteredList] = useState([]);
+  const [resList, setResList] = useState([]); // single source of truth
   const [selectedOption, setSelectedOption] = useState("id");
   const [searchText, setSearchText] = useState("");
 
-  // Unified Modal control (for both select & status modes)
+  // Unified Modal control
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState("select"); // "select" | "status"
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState([]);
   const [modalUrl, setModalUrl] = useState("");
-  const [modalType, setModalType] = useState("success"); // for status mode
+  const [modalType, setModalType] = useState("success");
   const [modalMessage, setModalMessage] = useState("");
   const [updateUrl, setUpdateUrl] = useState("");
 
@@ -27,16 +26,12 @@ export default function RestaurantList() {
   const resBaseUrl = "http://localhost:8080/api/restaurant";
   const baseUrl = "http://localhost:8080/api";
 
-  const handleSearch = () => {
-    if (!searchText) {
-      setFilteredList([]);
-      return;
-    }
-    const filtered = resList.filter((item) =>
-      item[selectedOption]?.toString().toLowerCase().includes(searchText)
-    );
-    setFilteredList(filtered);
-  };
+  // Filtered list is computed on the fly
+  const displayedList = searchText
+    ? resList.filter((item) =>
+        item[selectedOption]?.toString().toLowerCase().includes(searchText)
+      )
+    : resList;
 
   const handleNavigate = (row) => {
     navigate(`/restaurant-details/${row.id}`, { state: { row, editResUrl } });
@@ -51,9 +46,10 @@ export default function RestaurantList() {
       .then((res) => {
         if (!res.ok) throw new Error("Unable to delete");
         if (res.status === 204) {
+          // Update state instantly
           setResList((prev) => prev.filter((item) => item.id !== row.id));
-          setFilteredList((prev) => prev.filter((item) => item.id !== row.id));
-          // open status modal
+
+          // Show success modal
           setModalMode("status");
           setModalMessage(
             `${row?.restaurantName} restaurant deleted Successfully`
@@ -94,18 +90,18 @@ export default function RestaurantList() {
         return res.json();
       })
       .then(() => {
-        // ✅ Immediately refresh the restaurant list from backend
-        return fetch(resBaseUrl, {
+        // Refresh restaurant list from backend
+        const resUrl = `${resBaseUrl}/getAll`;
+        return fetch(resUrl, {
           headers: { "Content-Type": "application/json" },
         });
       })
       .then((res) => res.json())
       .then((data) => {
         const updatedList = data?.data?.content || [];
-        setResList(updatedList);
-        setFilteredList(updatedList); // also update filtered list so modal gets fresh data
+        setResList(updatedList); // directly update full list
 
-        // ✅ Show success status modal
+        // Show success modal
         setModalMode("status");
         setModalMessage(`${modalTitle} list updated Successfully`);
         setModalType("success");
@@ -131,11 +127,11 @@ export default function RestaurantList() {
         setSelectedOption={setSelectedOption}
         searchText={searchText}
         setSearchText={setSearchText}
-        handleSearch={handleSearch}
+        handleSearch={() => {}} // no-op now
       />
       <Table
         title={"Restaurants"}
-        resList={filteredList.length > 0 || searchText ? filteredList : resList}
+        resList={displayedList}
         setResList={setResList}
         url={"http://localhost:8080/api/restaurant/getAll"}
         handleNavigate={handleNavigate}
