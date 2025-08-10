@@ -59,6 +59,28 @@ button[type="reset"] {
   background-color: #6c757d;
 }
 
+button[type="edit"]{
+  background-color: transparent;
+}
+button[type="delete"]{
+  background: transparent;
+}
+
+button[type="edit"]:hover{
+  background: transparent;
+}
+button[type="delete"]:hover{
+  background: transparent;
+}
+
+button img {
+  transition: transform 0.2s ease-in-out;
+}
+
+button img:hover {
+  transform: scale(1.2);
+}
+
 button:hover {
   background-color: #0056b3;
 }

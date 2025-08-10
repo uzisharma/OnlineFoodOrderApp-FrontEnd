@@ -94,7 +94,7 @@ export default function UnifiedModal({
 
         {/* Footer buttons */}
         {mode === "select" && (
-          <Button onClick={() => saveList(selectedIds)} label="Save Changes" />
+          <Button onClick={() => saveList(selectedIds)}>Save Changes</Button>
         )}
         {mode === "status" && <button onClick={handleClose}>OK</button>}
       </div>

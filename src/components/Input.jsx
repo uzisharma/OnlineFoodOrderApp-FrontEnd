@@ -26,10 +26,10 @@ export default function Input({
   );
 }
 
-export function Button({ type = "submit", label, onClick }) {
+export function Button({ type = "submit", children, onClick }) {
   return (
     <button type={type} onClick={onClick}>
-      {label}
+      {children}
     </button>
   );
 }

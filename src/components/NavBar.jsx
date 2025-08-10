@@ -7,7 +7,9 @@ export default function NavBar() {
     <nav>
       <div className="left-container">
         <img src={logo} alt="logo" />
-        <h1>Online Food Order Application</h1>
+        <Link className="header-link-element" to={"/"}>
+          <h1>Online Food Order Application</h1>
+        </Link>
       </div>
       <div className="right-container">
         <Link className="link-element" to="/">

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import "./style/Table.style.css";
 import PageNavigation from "./PageNavigation";
 import { Button } from "./Input";
+import editIcon from "../assets/editIcon.png";
+import deleteIcon from "../assets/deleteIcon.png";
 
 export default function Table({
   resList,
@@ -65,9 +67,11 @@ export default function Table({
                   return (
                     <td key={colName}>
                       <Button
-                        label={colName}
+                        // label={colName}
                         onClick={() => onClick(row, colName)}
-                      />
+                      >
+                        {colName}
+                      </Button>
                     </td>
                   );
                 }
@@ -75,10 +79,18 @@ export default function Table({
                 return <td key={colName}>{cell ?? "N/A"}</td>;
               })}
               <td key={index}>
-                <Button label={"Edit"} onClick={() => handleNavigate(row)} />
+                <Button type="edit" onClick={() => handleNavigate(row)}>
+                  {<img src={editIcon} alt="Edit" width={30} height={30} />}
+                </Button>
               </td>
               <td key={index + 1}>
-                <Button label={"Delete"} onClick={() => handleDelete(row)} />
+                <Button
+                  type="delete"
+                  label={deleteIcon}
+                  onClick={() => handleDelete(row)}
+                >
+                  {<img src={deleteIcon} alt="delete" width={30} height={30} />}
+                </Button>
               </td>
             </tr>
           ))}
