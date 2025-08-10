@@ -18,14 +18,16 @@ export default function Form({ heading, onSubmit, initialData = {} }) {
   };
 
   const cancelHandler = () => {
-    navigate("/listRestaurant");
+    // navigate("/listRestaurant");
+    console.log(`/list${heading}`);
+    navigate(`/list${heading}`);
   };
 
   return (
     <div className="form-layout">
       <div className="wrapper">
         <div className="form-container">
-          <h3>{heading}</h3>
+          <h3>{`Edit ${heading}`}</h3>
           <form onSubmit={handleSubmit}>
             {Object.entries(formData).map(([key, value]) => {
               if (key === "id" || key === "createdAt" || key === "updatedAt")

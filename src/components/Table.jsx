@@ -11,6 +11,7 @@ export default function Table({
   handleNavigate,
   handleDelete,
   onClick,
+  refreshTrigger,
 }) {
   const [received, setReceived] = useState({});
   const [baseUrl, setBaseUrl] = useState(url);
@@ -31,7 +32,7 @@ export default function Table({
       }
     };
     fetchData();
-  }, [setResList, baseUrl]);
+  }, [setResList, baseUrl, refreshTrigger]);
 
   const safeResList = Array.isArray(resList) ? resList : [];
   const columnHeader = resList.length > 0 ? Object.keys(safeResList[0]) : [];

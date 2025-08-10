@@ -95,7 +95,7 @@ export default function RestaurantList() {
       })
       .then(() => {
         // ✅ Immediately refresh the restaurant list from backend
-        return fetch("http://localhost:8080/api/restaurant/getAll", {
+        return fetch(resBaseUrl, {
           headers: { "Content-Type": "application/json" },
         });
       })

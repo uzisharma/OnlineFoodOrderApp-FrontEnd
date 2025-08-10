@@ -47,7 +47,7 @@ export default function AddRestaurant() {
     <>
       <title>Add Restaurant</title>
       <Form
-        heading="Add Restaurant"
+        heading="Restaurant"
         onSubmit={handleSubmit}
         initialData={initialData}
       />

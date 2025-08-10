@@ -18,6 +18,8 @@
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   animation: fadeIn 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-header {
@@ -31,6 +33,7 @@
   border: none;
   font-size: 1.2rem;
   cursor: pointer;
+  color: black;
 }
 
 .modal-close:hover {
@@ -39,6 +42,10 @@
 
 .modal-body {
   margin-top: 10px;
+}
+
+.btn-close{
+  align-self: flex-end;
 }
 
 /* Fade-in animation */

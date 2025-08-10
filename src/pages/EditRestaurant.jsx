@@ -59,7 +59,7 @@ export default function EditRestaurant() {
         <title>Edit Restaurant</title>
         {row ? (
           <Form
-            heading={"Edit Restaurant"}
+            heading={"Restaurant"}
             onSubmit={handleSubmit}
             initialData={row}
           />
