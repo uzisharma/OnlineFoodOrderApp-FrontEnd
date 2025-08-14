@@ -24,6 +24,9 @@ export default function NavBar() {
         <Link className="link-element" to="/listFood">
           View Food
         </Link>
+        <Link className="link-element" to="/login">
+          LoginForm
+        </Link>
       </div>
     </nav>
   );

@@ -4,7 +4,8 @@ import NavBar from "./components/NavBar";
 import AddRestaurant from "./pages/AddRestaurant";
 import RestaurantList from "./pages/RestaurantList";
 import EditRestaurant from "./pages/EditRestaurant";
-import FoodList from "./pages/FoolList";
+import FoodList from "./pages/FoodList";
+import LoginOrRegister from "./pages/LoginOrRegister";
 function App() {
   return (
     <>
@@ -15,6 +16,7 @@ function App() {
         <Route path="/listRestaurant" element={<RestaurantList />}></Route>
         <Route path="/listFood" element={<FoodList />}></Route>
         <Route path="/restaurant-details/:id" element={<EditRestaurant />} />
+        <Route path="/login" element={<LoginOrRegister />} />
       </Routes>
     </>
   );
