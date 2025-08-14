@@ -6,17 +6,22 @@ import RestaurantList from "./pages/RestaurantList";
 import EditRestaurant from "./pages/EditRestaurant";
 import FoodList from "./pages/FoodList";
 import LoginOrRegister from "./pages/LoginOrRegister";
+import { useState } from "react";
 function App() {
+  const [role, setRole] = useState("user");
   return (
     <>
-      <NavBar />
-      <Routes>
+      <NavBar role={role} />
+      <Routes role={role}>
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/addRestaurant" element={<AddRestaurant />}></Route>
         <Route path="/listRestaurant" element={<RestaurantList />}></Route>
         <Route path="/listFood" element={<FoodList />}></Route>
         <Route path="/restaurant-details/:id" element={<EditRestaurant />} />
-        <Route path="/login" element={<LoginOrRegister />} />
+        <Route
+          path="/login"
+          element={<LoginOrRegister role={role} setRole={setRole} />}
+        />
       </Routes>
     </>
   );

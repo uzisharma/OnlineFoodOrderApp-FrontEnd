@@ -2,7 +2,7 @@ import { useState } from "react";
 import Input, { Button } from "./Input";
 import "./style/LoginForm.css";
 
-export default function LoginForm({ title, role }) {
+export default function LoginForm({ title, role, onClick }) {
   const [formData, setFormData] = useState();
 
   const titleDisp = title.charAt(0).toUpperCase() + title.slice(1);
@@ -38,7 +38,9 @@ export default function LoginForm({ title, role }) {
           changeFun={changeFun}
         />
         <div className="btn-container">
-          <Button type="submit">{titleDisp}</Button>
+          <Button onClick={onClick} type="submit">
+            {titleDisp}
+          </Button>
         </div>
       </div>
     </div>

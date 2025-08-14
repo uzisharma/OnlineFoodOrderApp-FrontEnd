@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import "./style/NavBar.css";
 import logo from "../assets/logo.png";
 
-export default function NavBar() {
+export default function NavBar({ role }) {
   return (
     <nav>
       <div className="left-container">
@@ -25,7 +25,7 @@ export default function NavBar() {
           View Food
         </Link>
         <Link className="link-element" to="/login">
-          LoginForm
+          {role} LoginForm
         </Link>
       </div>
     </nav>
