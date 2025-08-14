@@ -23,14 +23,13 @@ input[type="password"] {
   font-size: 1em;
   flex: 1;
   max-width: 350px;
+
+  &:focus{
+    border-color: #007bff;
+    outline: none;
+  }
 }
 
-input[type="text"]:focus,
-input[type="number"]:focus,
-input[type="password"]:focus {
-  border-color: #007bff;
-  outline: none;
-}
 
 #address {
   height: 100px;
@@ -40,7 +39,6 @@ input[type="password"]:focus {
 .button-container {
   display: flex;
   justify-content: flex-end;
-  /* gap: 10px; */
   margin-top: 20px;
 }
 
@@ -62,38 +60,33 @@ button {
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  margin-right: 10px;
+  margin-left: 10px;
+
+  &:hover{
+     background-color: #0056b3;
+  }
 }
 
 button[type="reset"] {
   background-color: #6c757d;
 }
 
-button[type="edit"]{
-  background-color: transparent;
-}
-button[type="delete"]{
-  background: transparent;
-}
 
-button[type="edit"]:hover{
-  background: transparent;
-}
-button[type="delete"]:hover{
-  background: transparent;
+button[type="edit"],
+button[type="delete"]{
+  background-color: transparent;
+  &:hover{
+    background: transparent;
+  }
 }
 
 button img {
   transition: transform 0.2s ease-in-out;
+  &:hover{
+    transform: scale(1.2);
+  }
 }
 
-button img:hover {
-  transform: scale(1.2);
-}
-
-button:hover {
-  background-color: #0056b3;
-}
 
 button[type="reset"]:hover {
   background-color: #5a6268;

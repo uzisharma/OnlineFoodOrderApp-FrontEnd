@@ -3,11 +3,11 @@ import NavBar from "./components/NavBar";
 import "./Layout.css";
 export default function Layout({ role }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
-      <div style={{ height: "80px", flexShrink: 0 }}>
+    <div className="app-content">
+      <div className="nav-content">
         <NavBar role={role} />
       </div>
-      <div style={{ flex: "1", overflowY: "auto" }}>
+      <div className="body-content">
         <Outlet />
       </div>
     </div>
