@@ -8,22 +8,24 @@ import FoodList from "./pages/FoodList";
 import LoginOrRegister from "./pages/LoginOrRegister";
 import { useState } from "react";
 import UserPage from "./pages/UserPage";
+import Layout from "./Layout";
 function App() {
   const [role, setRole] = useState("user");
   return (
     <>
-      <NavBar role={role} />
-      <Routes role={role}>
-        <Route path="/" element={<HomePage />}></Route>
-        <Route path="/addRestaurant" element={<AddRestaurant />}></Route>
-        <Route path="/listRestaurant" element={<RestaurantList />}></Route>
-        <Route path="/listFood" element={<FoodList />}></Route>
-        <Route path="/restaurant-details/:id" element={<EditRestaurant />} />
-        <Route
-          path="/login"
-          element={<LoginOrRegister role={role} setRole={setRole} />}
-        />
-        <Route path="/user-page" element={<UserPage />} />
+      <Routes>
+        <Route path="/" element={<Layout role={role} />}>
+          <Route index element={<HomePage />} />
+          <Route path="/addRestaurant" element={<AddRestaurant />} />
+          <Route path="/listRestaurant" element={<RestaurantList />} />
+          <Route path="/listFood" element={<FoodList />} />
+          <Route path="/restaurant-details/:id" element={<EditRestaurant />} />
+          <Route
+            path="/login"
+            element={<LoginOrRegister role={role} setRole={setRole} />}
+          />
+          <Route path="/user-page" element={<UserPage />} />
+        </Route>
       </Routes>
     </>
   );
