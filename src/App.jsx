@@ -7,6 +7,7 @@ import EditRestaurant from "./pages/EditRestaurant";
 import FoodList from "./pages/FoodList";
 import LoginOrRegister from "./pages/LoginOrRegister";
 import { useState } from "react";
+import UserPage from "./pages/UserPage";
 function App() {
   const [role, setRole] = useState("user");
   return (
@@ -22,6 +23,7 @@ function App() {
           path="/login"
           element={<LoginOrRegister role={role} setRole={setRole} />}
         />
+        <Route path="/user-page" element={<UserPage />} />
       </Routes>
     </>
   );
