@@ -1,8 +1,10 @@
 import { Link } from "react-router";
 import "./style/NavBar.css";
 import logo from "../assets/logo.png";
+import { useRole } from "../context/RoleContext";
 
-export default function NavBar({ role }) {
+export default function NavBar() {
+  const { role } = useRole();
   return (
     <nav>
       <div className="left-container">

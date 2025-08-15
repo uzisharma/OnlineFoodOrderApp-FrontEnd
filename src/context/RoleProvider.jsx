@@ -2,7 +2,7 @@ import { useState } from "react";
 import { RoleContext } from "./RoleContext";
 
 export function RoleProvider({ children }) {
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState("user");
 
   return (
     <RoleContext.Provider value={{ role, setRole }}>

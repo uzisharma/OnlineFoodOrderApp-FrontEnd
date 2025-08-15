@@ -7,7 +7,7 @@ import { useRole } from "../context/RoleContext";
 export default function LoginForm({ title, onClick }) {
   const { role, setRole } = useRole();
   const [formData, setFormData] = useState();
-  const [roleDisp, setRoleDisp] = useState("admin");
+  // const [roleDisp, setRoleDisp] = useState("admin");
 
   const titleDisp = title.charAt(0).toUpperCase() + title.slice(1);
   const username = "username";
@@ -21,13 +21,7 @@ export default function LoginForm({ title, onClick }) {
   };
 
   const changeTo = () => {
-    if (role === "user") {
-      setRoleDisp(role);
-      setRole("admin");
-    } else {
-      setRoleDisp(role);
-      setRole("user");
-    }
+    role === "user" ? setRole("admin") : setRole("user");
   };
 
   const onChangeHandler = (e) => {
@@ -78,7 +72,7 @@ export default function LoginForm({ title, onClick }) {
             }}
             onClick={changeTo}
           >
-            {roleDisp.charAt(0).toUpperCase() + roleDisp.slice(1)}
+            {role === "user" ? "Admin" : "User"}
           </span>
         </span>
       </div>
