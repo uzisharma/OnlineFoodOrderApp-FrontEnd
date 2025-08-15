@@ -33,3 +33,12 @@ export function Button({ type = "submit", children, onClick }) {
     </button>
   );
 }
+
+export function CheckboxInput({ children, onChange }) {
+  return (
+    <label className="checkbox-label">
+      {children}
+      <input type="checkbox" onChange={onChange} />
+    </label>
+  );
+}

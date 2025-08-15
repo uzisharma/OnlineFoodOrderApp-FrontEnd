@@ -4,13 +4,14 @@ import LoginForm from "../components/LoginForm";
 
 export default function LoginOrRegister({ role, setRole }) {
   const navigate = useNavigate();
+  const titleDisp = role.charAt(0).toUpperCase() + role.slice(1);
   const handleSubmit = () => {
     navigate("/user-page");
   };
 
   return (
     <>
-      {<title>{role}</title>}
+      {<title>{titleDisp}</title>}
       <Button
         onClick={() => (role === "user" ? setRole("admin") : setRole("user"))}
       >

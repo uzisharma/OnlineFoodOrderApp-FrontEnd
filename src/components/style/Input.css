@@ -30,6 +30,17 @@ input[type="password"] {
   }
 }
 
+.checkbox-label{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+}
+.checkbox-label input[type="checkbox"]{
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+}
 
 #address {
   height: 100px;
