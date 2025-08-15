@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router";
-import { Button } from "../components/Input";
 import LoginForm from "../components/LoginForm";
 
 export default function LoginOrRegister({ role, setRole }) {
@@ -12,12 +11,12 @@ export default function LoginOrRegister({ role, setRole }) {
   return (
     <>
       {<title>{titleDisp}</title>}
-      <Button
-        onClick={() => (role === "user" ? setRole("admin") : setRole("user"))}
-      >
-        {role} Login
-      </Button>
-      <LoginForm title={"login"} role={role} onClick={handleSubmit} />
+      <LoginForm
+        title={"login"}
+        role={role}
+        setRole={setRole}
+        onClick={handleSubmit}
+      />
     </>
   );
 }

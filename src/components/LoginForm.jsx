@@ -3,8 +3,9 @@ import Input, { Button, CheckboxInput } from "./Input";
 import "./style/LoginForm.css";
 import { Link } from "react-router";
 
-export default function LoginForm({ title, role, onClick }) {
+export default function LoginForm({ title, role, setRole, onClick }) {
   const [formData, setFormData] = useState();
+  const [roleDisp, setRoleDisp] = useState("admin");
 
   const titleDisp = title.charAt(0).toUpperCase() + title.slice(1);
   const username = "username";
@@ -15,6 +16,17 @@ export default function LoginForm({ title, role, onClick }) {
     const index = 1;
     setFormData(() => ({ [index]: val }));
     console.log(formData);
+  };
+
+  const changeTo = () => {
+    // role === "user" ? setRole("admin") : setRole("user");
+    if (role === "user") {
+      setRoleDisp(role);
+      setRole("admin");
+    } else {
+      setRoleDisp(role);
+      setRole("user");
+    }
   };
 
   const onChangeHandler = (e) => {
@@ -53,6 +65,25 @@ export default function LoginForm({ title, role, onClick }) {
             {titleDisp}
           </Button>
         </div>
+      </div>
+      <div>
+        <span>
+          Click to sign-in as{"" + " "}
+          <span
+            style={{
+              cursor: "pointer",
+              textDecoration: "underline",
+              color: "blue",
+            }}
+            onClick={changeTo}
+          >
+            {roleDisp.charAt(0).toUpperCase() + roleDisp.slice(1)}
+          </span>
+        </span>
+      </div>
+      <div className="footer-container">
+        <span>Don't have an account?</span>
+        <Link> Create account</Link>
       </div>
     </div>
   );

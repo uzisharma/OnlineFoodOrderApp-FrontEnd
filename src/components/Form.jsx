@@ -24,39 +24,35 @@ export default function Form({ heading, onSubmit, initialData = {} }) {
   };
 
   return (
-    <div className="form-layout">
-      <div className="wrapper">
-        <div className="form-container">
-          <h3>{`Edit ${heading}`}</h3>
-          <form onSubmit={handleSubmit}>
-            {Object.entries(formData).map(([key, value]) => {
-              if (key === "id" || key === "createdAt" || key === "updatedAt")
-                return null;
+    <div className="form-container">
+      <h3>{`Add ${heading}`}</h3>
+      <form onSubmit={handleSubmit}>
+        {Object.entries(formData).map(([key, value]) => {
+          if (key === "id" || key === "createdAt" || key === "updatedAt")
+            return null;
 
-              if (typeof value === "object") {
-                return;
-              }
+          if (typeof value === "object") {
+            return;
+          }
 
-              return (
-                <Input
-                  key={key}
-                  name={key}
-                  value={value}
-                  placeholder={key.charAt(0).toUpperCase() + key.slice(1)}
-                  type={typeof value === "number" ? "number" : "text"}
-                  changeFun={(val) => handleChange(key, val)}
-                />
-              );
-            })}
-            <div className="button-container">
-              <button type="submit">Submit</button>
-              <button type="button" onClick={cancelHandler}>
-                Cancel
-              </button>
-            </div>
-          </form>
+          return (
+            <Input
+              key={key}
+              name={key}
+              value={value}
+              placeholder={key.charAt(0).toUpperCase() + key.slice(1)}
+              type={typeof value === "number" ? "number" : "text"}
+              changeFun={(val) => handleChange(key, val)}
+            />
+          );
+        })}
+        <div className="button-container">
+          <button type="submit">Submit</button>
+          <button type="button" onClick={cancelHandler}>
+            Cancel
+          </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
