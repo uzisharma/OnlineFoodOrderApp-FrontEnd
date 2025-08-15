@@ -2,8 +2,10 @@ import { useState } from "react";
 import Input, { Button, CheckboxInput } from "./Input";
 import "./style/LoginForm.css";
 import { Link } from "react-router";
+import { useRole } from "../context/RoleContext";
 
-export default function LoginForm({ title, role, setRole, onClick }) {
+export default function LoginForm({ title, onClick }) {
+  const { role, setRole } = useRole();
   const [formData, setFormData] = useState();
   const [roleDisp, setRoleDisp] = useState("admin");
 
@@ -19,7 +21,6 @@ export default function LoginForm({ title, role, setRole, onClick }) {
   };
 
   const changeTo = () => {
-    // role === "user" ? setRole("admin") : setRole("user");
     if (role === "user") {
       setRoleDisp(role);
       setRole("admin");
