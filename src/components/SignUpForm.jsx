@@ -3,9 +3,10 @@ import Input, { Button, SelectInput } from "./Input";
 import "./style/SignUpForm.css";
 
 export default function SignUpForm() {
+  const baseUrl = "http://localhost:8080/api/user/save";
   const inputDetails = [
     {
-      name: "username",
+      name: "userName",
       placeholder: "username",
       type: "text",
     },
@@ -26,7 +27,7 @@ export default function SignUpForm() {
       type: "text",
     },
     {
-      name: "contact",
+      name: "contactNumber",
       placeholder: "+91 0000000000",
       type: "number",
     },
@@ -42,23 +43,34 @@ export default function SignUpForm() {
     return acc;
   }, {});
 
-  const [formData, setFormData] = useState({ initialDetails });
+  const [formData, setFormData] = useState(initialDetails);
 
   const handleChange = (key, val) => {
     setFormData((prev) => ({ ...prev, [key]: val }));
   };
   const resetForm = () => {
-    const emptySpace = inputDetails.reduce((acc, field) => {
-      acc[field.name] = "";
-      return acc;
-    }, {});
-    setFormData(emptySpace);
+    setFormData(initialDetails);
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    alert("Account Created");
-    resetForm();
+    try {
+      const response = await fetch(baseUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        alert("Account Created");
+        resetForm();
+      } else {
+        alert("Failed to create an account");
+      }
+    } catch (error) {
+      console.log("Something went wrong ", error);
+    }
   };
 
   return (
@@ -67,22 +79,22 @@ export default function SignUpForm() {
         <form onSubmit={handleSubmit}>
           <div className="body-content">
             <header>Create Account</header>
-            {inputDetails.map((ip) =>
-              ip.type === "select" ? (
+            {inputDetails.map((field) =>
+              field.type === "select" ? (
                 <SelectInput
-                  key={ip.name}
-                  name={ip.name}
-                  options={ip.options}
-                  changeFun={(val) => handleChange(ip.name, val)}
+                  key={field.name}
+                  name={field.name}
+                  options={field.options}
+                  changeFun={(val) => handleChange(field.name, val)}
                 />
               ) : (
                 <Input
-                  key={ip.name}
-                  name={ip.name}
-                  type={ip.type}
-                  placeholder={ip.placeholder}
-                  value={formData[ip.name]}
-                  changeFun={(val) => handleChange(ip.name, val)}
+                  key={field.name}
+                  name={field.name}
+                  type={field.type}
+                  placeholder={field.placeholder}
+                  value={formData[field.name]}
+                  changeFun={(val) => handleChange(field.name, val)}
                 />
               )
             )}
