@@ -14,21 +14,22 @@ label {
 }
 
 /* Input */
-input[type="text"],
-input[type="number"],
-input[type="password"] {
-  padding: 10px 15px;
-  border-radius: 5px;
+input:is([type="text"], [type="number"], [type="password"], [type="email"]),select {
+  padding: 0.625rem 0.9375rem;
+  border-radius: 0.5rem;
   border: 1px solid #ccc;
-  font-size: 1em;
+  font-size: 1rem;
   flex: 1;
-  max-width: 350px;
+  max-width: 22rem;
+  transition: border-color 0.25s, box-shadow 0.25s;
 
-  &:focus{
+  &:focus {
     border-color: #007bff;
     outline: none;
+    /* box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); */
   }
 }
+
 
 .checkbox-label{
   display: flex;

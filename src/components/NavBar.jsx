@@ -13,38 +13,37 @@ export default function NavBar() {
           <h1>Online Food Order Application</h1>
         </Link>
       </div>
-      {role === "admin" && (
-        <div className="right-container">
-          <Link className="link-element" to="/">
-            HomePage
-          </Link>
-          <Link className="link-element" to="/addRestaurant">
-            Add Restaurant
-          </Link>
-          <Link className="link-element" to="/listRestaurant">
-            View Restaurants
-          </Link>
-          <Link className="link-element" to="/listFood">
-            View Food
-          </Link>
-          <Link className="link-element" to="/login">
-            {role} LoginForm
-          </Link>
-        </div>
-      )}
-      {role === "user" && (
-        <div className="right-container">
-          <Link className="link-element" to="/listRestaurant">
-            View Restaurants
-          </Link>
-          <Link className="link-element" to="/listFood">
-            View Food
-          </Link>
-          <Link className="link-element" to="/login">
-            {role} LoginForm
-          </Link>
-        </div>
-      )}
+      <div className="right-container">
+        {role === "admin" && (
+          <>
+            <Link className="link-element" to="/">
+              HomePage
+            </Link>
+            <Link className="link-element" to="/addRestaurant">
+              Add Restaurant
+            </Link>
+            <Link className="link-element" to="/listRestaurant">
+              View Restaurants
+            </Link>
+            <Link className="link-element" to="/listFood">
+              View Food
+            </Link>
+          </>
+        )}
+        {role === "user" && (
+          <>
+            <Link className="link-element" to="/listRestaurant">
+              View Restaurants
+            </Link>
+            <Link className="link-element" to="/listFood">
+              View Food
+            </Link>
+          </>
+        )}
+        <Link className="link-element" to="/login">
+          Login/SignUp
+        </Link>
+      </div>
     </nav>
   );
 }
