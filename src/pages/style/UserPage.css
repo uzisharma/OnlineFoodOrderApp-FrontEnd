@@ -1,0 +1,13 @@
+.userPage-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.food-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cards in a row */
+  gap: 20px; /* space between cards */
+  padding: 20px;
+}

@@ -1,23 +1,27 @@
 import { useState } from "react";
 import Input, { Button, CheckboxInput } from "./Input";
 import "./style/LoginForm.css";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useRole } from "../context/RoleContext";
 
-export default function LoginForm({ title, onClick }) {
-  const { role, setRole } = useRole();
-  const [formData, setFormData] = useState();
-  // const [roleDisp, setRoleDisp] = useState("admin");
+export default function LoginForm({ title, setIsLogin, url }) {
+  const navigate = useNavigate();
+  const { role, setRole, setIsLogged } = useRole();
 
-  const titleDisp = title.charAt(0).toUpperCase() + title.slice(1);
-  const username = "username";
-  const password = "password";
+  const inputDetails = [
+    { name: "userName", placeholder: "Username", type: "text" },
+    { name: "password", placeholder: "Password", type: "password" },
+  ];
 
-  const changeFun = (val) => {
-    console.log(val);
-    const index = 1;
-    setFormData(() => ({ [index]: val }));
-    console.log(formData);
+  const initialDetails = inputDetails.reduce((acc, field) => {
+    acc[field.name] = "";
+    return acc;
+  }, {});
+
+  const [formData, setFormData] = useState(initialDetails);
+
+  const handleChange = (key, val) => {
+    setFormData((prev) => ({ ...prev, [key]: val }));
   };
 
   const changeTo = () => {
@@ -28,42 +32,65 @@ export default function LoginForm({ title, onClick }) {
     console.log(e.target.checked);
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const loginUrl = `${url}/login`; // your API endpoint
+      const response = await fetch(loginUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        console.log("Logged in");
+        setIsLogged(true);
+        navigate("/user-page");
+      } else {
+        console.log("Login Failed");
+      }
+    } catch (error) {
+      console.error("Something went wrong", error);
+    }
+  };
+
+  const titleDisp = title.charAt(0).toUpperCase() + title.slice(1);
+
   return (
     <div className="login-wrapper">
       <header>
         <h2>
-          {`${role.charAt(0).toUpperCase() + role.slice(1)} ${titleDisp} `}
+          {`${role.charAt(0).toUpperCase() + role.slice(1)} ${titleDisp}`}
         </h2>
       </header>
 
-      <div className="login-container">
-        <Input
-          name={username}
-          placeholder={username.charAt(0).toUpperCase() + username.slice(1)}
-          type="text"
-          changeFun={changeFun}
-        />
-        <Input
-          name={password}
-          placeholder={password.charAt(0).toUpperCase() + password.slice(1)}
-          type="password"
-          changeFun={changeFun}
-        />
+      <form onSubmit={handleSubmit} className="login-container">
+        {inputDetails.map((field) => (
+          <Input
+            key={field.name}
+            name={field.name}
+            placeholder={field.placeholder}
+            type={field.type}
+            value={formData[field.name]}
+            changeFun={(val) => handleChange(field.name, val)}
+          />
+        ))}
+
         <div className="check-container">
           <Link to={"/"}>Forgot Password</Link>
           <CheckboxInput onChange={onChangeHandler}>
             <span>Remember me</span>
           </CheckboxInput>
         </div>
+
         <div className="btn-container">
-          <Button onClick={onClick} type="submit">
-            {titleDisp}
-          </Button>
+          <Button type="submit">{titleDisp}</Button>
         </div>
-      </div>
+      </form>
+
       <div>
         <span>
-          Click to sign-in as{"" + " "}
+          Click to sign-in as{" "}
           <span
             style={{
               cursor: "pointer",
@@ -76,9 +103,13 @@ export default function LoginForm({ title, onClick }) {
           </span>
         </span>
       </div>
+
       <div className="footer-container">
         <span>Don't have an account?</span>
-        <Link> Create account</Link>
+        <span className="span-link" onClick={() => setIsLogin(false)}>
+          {" "}
+          Create account
+        </span>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import { useState } from "react";
 import Input, { Button, SelectInput } from "./Input";
 import "./style/SignUpForm.css";
 
-export default function SignUpForm() {
+export default function SignUpForm({ setIsLogin, title }) {
   const baseUrl = "http://localhost:8080/api/user/save";
   const inputDetails = [
     {
@@ -75,6 +75,7 @@ export default function SignUpForm() {
 
   return (
     <div className="signup-container">
+      <title>{title}</title>
       <div className="main-container">
         <form onSubmit={handleSubmit}>
           <div className="body-content">
@@ -108,6 +109,12 @@ export default function SignUpForm() {
             </Button>
           </div>
         </form>
+        <footer>
+          <span>Already haven an account?</span>
+          <span className="span-link" onClick={() => setIsLogin(true)}>
+            Login
+          </span>
+        </footer>
       </div>
     </div>
   );

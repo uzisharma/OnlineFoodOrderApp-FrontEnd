@@ -8,6 +8,7 @@ import FoodList from "./pages/FoodList";
 import LoginOrRegister from "./pages/LoginOrRegister";
 import UserPage from "./pages/UserPage";
 import Layout from "./Layout";
+import RestaurantPage from "./pages/RestaurantPage";
 function App() {
   return (
     <>
@@ -20,6 +21,7 @@ function App() {
           <Route path="/restaurant-details/:id" element={<EditRestaurant />} />
           <Route path="/login" element={<LoginOrRegister />} />
           <Route path="/user-page" element={<UserPage />} />
+          <Route path="/res-details" element={<RestaurantPage />} />
         </Route>
       </Routes>
     </>
