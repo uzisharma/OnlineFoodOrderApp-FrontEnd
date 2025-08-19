@@ -1,0 +1,66 @@
+:root {
+  --dark-bg: rgb(159, 159, 159);
+  --dark-color: rgb(110, 110, 111);
+}
+
+.restaurant-page {
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  margin: 2em auto;
+}
+
+.res-details {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5em;
+  background-color: var(--dark-bg);
+  border-radius: 10px;
+  position: relative;
+}
+.rating {
+  position: absolute;
+  right: 1.5em;
+  font-size: 1.5em;
+}
+
+.res-sub-details {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2em;
+}
+
+.sub-details {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--dark-color);
+  padding: 1.5em 9.5em;
+  border-radius: 10px;
+}
+
+.res-menu {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2em;
+}
+.res-menu > header {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-left: 1em;
+}
+
+.menu-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cards in a row */
+  gap: 20px; /* space between cards */
+  padding: 20px;
+  border-radius: 10px;
+  background-color: var(--dark-bg);
+}
+
+.foodMenu {
+  background-color: var(--dark-color);
+}

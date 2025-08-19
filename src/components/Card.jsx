@@ -4,12 +4,12 @@ import pizzaImg from "../assets/pizza.jpg";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
-export function FoodCard({ food }) {
+export function FoodCard({ food, foodMenu }) {
   const [expanded, setExpanded] = useState(false);
   return (
     <>
-      <title>User Page</title>
-      <div className="card-container">
+      {/* <title>User Page</title> */}
+      <div className={`card-container ${foodMenu === "foodMenu" && foodMenu}`}>
         <div className="card-body">
           <div className="card-left">
             <div className="food-symbol veg" />
@@ -23,12 +23,12 @@ export function FoodCard({ food }) {
             <div className="card-description">
               <p>
                 {expanded
-                  ? food.description
-                  : food.description.length > 25
-                  ? food.description.slice(0, 25) + "..."
-                  : food.description}
+                  ? food?.description
+                  : food?.description?.length > 25
+                  ? food?.description?.slice(0, 25) + "..."
+                  : food?.description}
               </p>
-              {food.description.length > 25 && (
+              {food?.description?.length > 25 && (
                 <span
                   style={{ color: "blue", cursor: "pointer" }}
                   onClick={() => setExpanded(!expanded)}
@@ -43,8 +43,19 @@ export function FoodCard({ food }) {
           </div>
         </div>
         <div className="card-footer">
-          <Button className="add-to-card">ADD</Button>
-          <span> Customization</span>
+          {foodMenu === "foodMenu" ? (
+            <>
+              <button className="btn-count">-</button>
+              {"0"}
+              <button className="btn-count">+</button>
+              <button>Add to Cart</button>
+            </>
+          ) : (
+            <>
+              <Button className="add-to-card">ADD</Button>
+              <span> Customization</span>
+            </>
+          )}
         </div>
       </div>
     </>

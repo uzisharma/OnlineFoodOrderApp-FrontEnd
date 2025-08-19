@@ -5,7 +5,7 @@
   width: 100%;
 }
 
-.food-list {
+.food-list , .restaurant-list{
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3 cards in a row */
   gap: 20px; /* space between cards */
