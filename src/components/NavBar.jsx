@@ -1,17 +1,24 @@
 import { Link, useNavigate } from "react-router";
 import "./style/NavBar.css";
 import logo from "../assets/logo.png";
+import cartIcon from "../assets/cartIcon.png";
 import { useRole } from "../context/RoleContext";
-import UserService from "./UserService";
 import { Button } from "./Input";
+import SearchBar from "./SearchBar";
 
 export default function NavBar() {
-  const { role, isLogged, setIsLogged } = useRole();
+  const { cartItemCount, role, isLogged, setIsLogged, setUserDetails } =
+    useRole();
   const navigate = useNavigate();
 
   const handleLogOut = () => {
     setIsLogged(false);
+    setUserDetails(null);
     navigate("/");
+  };
+
+  const cartDetailsHandleClick = () => {
+    navigate("/user-cart-details");
   };
 
   return (
@@ -40,7 +47,7 @@ export default function NavBar() {
           </>
         ) : (
           <>
-            <UserService />
+            <SearchBar />
           </>
         )}
         {isLogged ? (
@@ -48,6 +55,10 @@ export default function NavBar() {
             <Button type="submit" onClick={handleLogOut}>
               Log-Out
             </Button>
+            <div className="cart-btn" onClick={cartDetailsHandleClick}>
+              <img src={cartIcon} alt={"cartImg"} width={"60"} height={"60"} />
+              <span>{cartItemCount}</span>
+            </div>
           </>
         ) : (
           <Link className="link-element" to="/login">

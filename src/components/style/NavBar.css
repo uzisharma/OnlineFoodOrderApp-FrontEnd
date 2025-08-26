@@ -39,8 +39,20 @@ nav > .right-container {
   text-decoration: none;
   font-size: larger;
   transition: transform 0.2s ease-in-out;
+
+  &:hover{
+    transform: scale(1.05);
+  }
 }
 
-.right-container>.link-element:hover{
-  transform: scale(1.05);
+.cart-btn{
+  cursor: pointer;
+  position: relative;
+
+  >span{
+    position: absolute;
+    top: 12px;
+    right: 22px;
+  }
 }
+

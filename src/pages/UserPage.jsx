@@ -35,10 +35,6 @@ export default function UserPage() {
     fetchRestaurant();
   }, []);
 
-  useEffect(() => {
-    // console.log(foodList);
-    console.log(resList);
-  }, [resList]);
   return (
     <div className="userPage-container">
       <div className="food-container">

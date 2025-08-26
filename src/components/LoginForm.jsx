@@ -3,10 +3,11 @@ import Input, { Button, CheckboxInput } from "./Input";
 import "./style/LoginForm.css";
 import { Link, useNavigate } from "react-router";
 import { useRole } from "../context/RoleContext";
+// import axios from "axios";
 
 export default function LoginForm({ title, setIsLogin, url }) {
   const navigate = useNavigate();
-  const { role, setRole, setIsLogged } = useRole();
+  const { setCartItemCount,role, setRole, setIsLogged, setUserDetails } = useRole();
 
   const inputDetails = [
     { name: "userName", placeholder: "Username", type: "text" },
@@ -32,6 +33,7 @@ export default function LoginForm({ title, setIsLogin, url }) {
     console.log(e.target.checked);
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -43,11 +45,14 @@ export default function LoginForm({ title, setIsLogin, url }) {
       });
 
       if (response.ok) {
-        console.log("Logged in");
+        const data = await response.json();
+        setCartItemCount(data?.data?.userCart?.cartItems?.length);
+        setUserDetails(data?.data)
         setIsLogged(true);
         navigate("/user-page");
       } else {
         console.log("Login Failed");
+        setUserDetails(null);
       }
     } catch (error) {
       console.error("Something went wrong", error);

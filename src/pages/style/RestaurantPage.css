@@ -49,7 +49,7 @@
 .res-menu > header {
   font-size: 2rem;
   font-weight: 600;
-  margin-left: 1em;
+  margin: 0 0 0.5em 1em;
 }
 
 .menu-list {
