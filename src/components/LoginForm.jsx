@@ -46,7 +46,7 @@ export default function LoginForm({ title, setIsLogin, url }) {
 
       if (response.ok) {
         const data = await response.json();
-        setCartItemCount(data?.data?.userCart?.cartItems?.length);
+        setCartItemCount(data?.data?.totalCartItem || "0");
         setUserDetails(data?.data)
         setIsLogged(true);
         navigate("/user-page");

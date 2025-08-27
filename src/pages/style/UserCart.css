@@ -1,0 +1,29 @@
+.user-cart {
+  width: 600px;
+  background-color: rgb(196, 212, 255);
+  margin-top: 2rem;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.food-cart {
+  display: flex;
+  background-color: rgb(198, 196, 196);
+  justify-content: space-around;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: inherit;
+  gap: 10px;
+  margin-bottom: 5px;
+
+  > .left-container {
+    flex: 1;
+  }
+  > .right-container {
+    display: inherit;
+    flex: 1;
+    justify-content: space-around;
+  }
+}
