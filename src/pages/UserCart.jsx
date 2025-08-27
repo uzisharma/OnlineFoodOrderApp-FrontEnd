@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRole } from "../context/RoleContext";
+import { Button } from "../components/Input";
 import "./style/UserCart.css";
 import axios from "axios";
 
@@ -26,17 +27,33 @@ export default function UserCart() {
   useEffect(() => {
     console.log(cart);
   }, [cart]);
+
+  const checkOutHandler = () => {};
   return (
     <>
-      <h2>user cart</h2>
+      {/* <h2>user cart</h2> */}
       <div className="user-cart">
         {cart?.cartRestaurant?.length > 0 ? (
           cart?.cartRestaurant.map((cartLine) => (
-            <UserCartList key={cartLine?.id} cartLine={cartLine} />
+            <>
+              <UserCartList key={cartLine?.id} cartLine={cartLine} />
+            </>
           ))
         ) : (
           <p>No Item in cart</p>
         )}
+        <div className="bottom-container">
+          <div className="total-price">
+            <span>Total Price = </span>
+            {cart?.cartPrice}
+          </div>
+          <div className="btn-container">
+            <Button type="reset" onClick={checkOutHandler}>
+              Clear Cart{" "}
+            </Button>
+            <Button onClick={checkOutHandler}>Checkout </Button>
+          </div>
+        </div>
       </div>
     </>
   );

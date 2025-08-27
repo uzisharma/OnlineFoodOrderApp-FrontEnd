@@ -1,16 +1,16 @@
 .user-cart {
   width: 600px;
-  background-color: rgb(196, 212, 255);
-  margin-top: 2rem;
+  background-color: rgb(238, 244, 255);
   border-radius: 10px;
-  border: none;
-  outline: none;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  margin: 2rem auto;
+  position: relative;
+  padding: 20px;
+
 }
 
 .food-cart {
   display: flex;
-  background-color: rgb(198, 196, 196);
   justify-content: space-around;
   padding: 1rem;
   border-radius: 5px;
@@ -26,4 +26,25 @@
     flex: 1;
     justify-content: space-around;
   }
+}
+.user-cart>.bottom-container{
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+}
+.bottom-container>button{
+  width: 200px;
+  align-self: flex-end;
+    margin-right: 1.2rem;
+}
+.bottom-container>.total-price{
+  font-size: larger;
+  flex: 1;
+  margin-bottom: 0.8rem;
+  align-self: flex-end;
+  margin-right: 1.2rem;
 }
