@@ -4,7 +4,7 @@ import pizzaImg from "../assets/pizza.jpg";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
-export function FoodCard({ food, foodMenu }) {
+export function FoodCard({ food, foodMenu, addToCart }) {
   const [expanded, setExpanded] = useState(false);
   return (
     <>
@@ -52,7 +52,12 @@ export function FoodCard({ food, foodMenu }) {
             </>
           ) : (
             <>
-              <Button className="add-to-card">ADD</Button>
+              <Button
+                className="add-to-card"
+                onClick={() => addToCart(food?.restaurantId, food?.id)}
+              >
+                ADD
+              </Button>
               <span> Customization</span>
             </>
           )}

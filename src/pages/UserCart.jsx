@@ -68,16 +68,10 @@ export default function UserCart() {
             {cart?.cartPrice}
           </div>
           <div className="btn-container">
-            <Button
-              type="reset"
-              onClick={clearCartHandler}
-              state={cartItemCount > 0}
-            >
+            <Button type="reset" onClick={clearCartHandler}>
               Clear Cart{" "}
             </Button>
-            <Button onClick={checkOutHandler} state={cartItemCount > 0}>
-              Checkout{" "}
-            </Button>
+            <Button onClick={checkOutHandler}>Checkout </Button>
           </div>
         </div>
       </div>
