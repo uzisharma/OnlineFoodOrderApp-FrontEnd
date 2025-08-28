@@ -4,8 +4,9 @@ import pizzaImg from "../assets/pizza.jpg";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
-export function FoodCard({ food, foodMenu, addToCart }) {
+export function FoodCard({ food, foodMenu, addToCart, resId }) {
   const [expanded, setExpanded] = useState(false);
+  const [foodQunatity, setFoodQuantity] = useState(0);
   return (
     <>
       {/* <title>User Page</title> */}
@@ -45,10 +46,26 @@ export function FoodCard({ food, foodMenu, addToCart }) {
         <div className="card-footer">
           {foodMenu === "foodMenu" ? (
             <>
-              <button className="btn-count">-</button>
-              {"0"}
-              <button className="btn-count">+</button>
-              <button>Add to Cart</button>
+              <button
+                className="btn-count"
+                onClick={() =>
+                  setFoodQuantity(
+                    foodQunatity != 0 ? foodQunatity - 1 : foodQunatity
+                  )
+                }
+              >
+                -
+              </button>
+              {foodQunatity}
+              <button
+                className="btn-count"
+                onClick={() => setFoodQuantity(foodQunatity + 1)}
+              >
+                +
+              </button>
+              <button onClick={() => addToCart(resId, food?.id, foodQunatity)}>
+                Add to Cart
+              </button>
             </>
           ) : (
             <>

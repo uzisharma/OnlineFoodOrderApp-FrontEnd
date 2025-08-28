@@ -1,11 +1,24 @@
 import { useLocation } from "react-router";
 import "./style/RestaurantPage.css";
 import { FoodCard } from "../components/Card";
+import { useRole } from "../context/RoleContext";
+import { addToCart } from "../service/cartService";
 
 export default function RestaurantPage() {
   const location = useLocation();
+  const { setCartItemCount, userDetails } = useRole();
   const data = location.state;
-  console.log(data);
+
+  const handleAddToCart = async (restaurantId, foodId, quantity) => {
+    const response = await addToCart(
+      userDetails?.id,
+      restaurantId,
+      foodId,
+      quantity
+    );
+    setCartItemCount(response?.data?.userCartItem?.totalCartItem);
+  };
+
   return (
     <div className="restaurant-page">
       <div className="res-details">
@@ -28,6 +41,8 @@ export default function RestaurantPage() {
               foodMenu={"foodMenu"}
               key={foodDetails?.id}
               food={foodDetails}
+              addToCart={handleAddToCart}
+              resId={data?.id}
             />
           ))}
         </div>

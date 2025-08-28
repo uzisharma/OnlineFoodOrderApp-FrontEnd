@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FoodCard, RestaurantCard } from "../components/Card";
 import "./style/UserPage.css";
 import { useRole } from "../context/RoleContext";
-import axios from "axios";
+import { addToCart } from "../service/cartService";
 
 export default function UserPage() {
   const [foodList, setFoodList] = useState([]);
@@ -39,29 +39,15 @@ export default function UserPage() {
     fetchRestaurant();
   }, []);
 
-  const addToCart = async (restaurantId, foodId, quantity = 1) => {
+  const handleAddToCart = async (restaurantId, foodId, quantity) => {
     let resId;
     if (restaurantId.length === 0) {
       resId = 1;
     } else {
       resId = restaurantId[0];
     }
-
-    try {
-      const response = await axios.post(`${API_URL}/cart/add`, {
-        userId: userDetails?.id,
-        restaurantId: resId,
-        foodId: foodId,
-        quantity: quantity,
-      });
-      setCartItemCount(response?.data?.data?.userCartItem?.totalCartItem);
-    } catch (err) {
-      if (err.response) {
-        console.error("Backend error:", err.response.data);
-      } else {
-        console.error("Unexpected error:", err.message);
-      }
-    }
+    const response = await addToCart(userDetails?.id, resId, foodId, quantity);
+    setCartItemCount(response?.data?.userCartItem?.totalCartItem);
   };
 
   return (
@@ -70,7 +56,7 @@ export default function UserPage() {
         <h1>Most Ordered</h1>
         <div className="food-list">
           {foodList.map((food) => (
-            <FoodCard key={food.id} food={food} addToCart={addToCart} />
+            <FoodCard key={food.id} food={food} addToCart={handleAddToCart} />
           ))}
         </div>
       </div>
