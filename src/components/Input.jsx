@@ -30,9 +30,9 @@ export default function Input({
   );
 }
 
-export function Button({ type = "submit", children, onClick }) {
+export function Button({ type = "submit", children, onClick, state }) {
   return (
-    <button type={type} onClick={onClick}>
+    <button type={type} onClick={onClick} disabled={state}>
       {children}
     </button>
   );

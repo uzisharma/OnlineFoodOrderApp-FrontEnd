@@ -7,37 +7,57 @@ import axios from "axios";
 export default function UserCart() {
   const [cart, setCart] = useState(null);
   const API_URL = import.meta.env.VITE_API_URL;
-  const { userDetails } = useRole();
+  const { cartItemCount, setCartItemCount, userDetails } = useRole();
 
   useEffect(() => {
-    if (!userDetails?.id) return;
+    if (!userDetails?.id || cartItemCount < 1) return;
     const fetchCart = async () => {
       try {
         const response = await axios.get(
           `${API_URL}/cart/get/${userDetails?.id}`
         );
-        setCart(response?.data?.data?.cartItem);
+        setCart(response?.data?.data?.userCartItem);
       } catch (err) {
-        console.error(err);
+        if (err.response) {
+          // 👇 Access your backend ResponseStructure
+          console.error("Backend Error:", err.response.data);
+          alert(err.response.data.data);
+        } else {
+          console.error("Unexpected Error:", err.message);
+        }
       }
     };
     fetchCart();
-  }, [userDetails, API_URL]);
+  }, [userDetails, cartItemCount, API_URL]);
 
   useEffect(() => {
     console.log(cart);
   }, [cart]);
 
   const checkOutHandler = () => {};
+  const clearCartHandler = async () => {
+    if (cartItemCount < 1) return;
+    try {
+      await axios.delete(`${API_URL}/cart/${userDetails?.id}/delete`);
+      setCart({ cartRestaurant: [], cartPrice: 0 });
+      setCartItemCount(0);
+    } catch (err) {
+      if (err.response) {
+        // 👇 Access your backend ResponseStructure
+        console.error("Backend Error:", err.response.data);
+        alert(err.response.data.data);
+      } else {
+        console.error("Unexpected Error:", err.message);
+      }
+    }
+  };
   return (
     <>
       {/* <h2>user cart</h2> */}
       <div className="user-cart">
         {cart?.cartRestaurant?.length > 0 ? (
           cart?.cartRestaurant.map((cartLine) => (
-            <>
-              <UserCartList key={cartLine?.id} cartLine={cartLine} />
-            </>
+            <UserCartList key={cartLine?.id} cartLine={cartLine} />
           ))
         ) : (
           <p>No Item in cart</p>
@@ -48,10 +68,16 @@ export default function UserCart() {
             {cart?.cartPrice}
           </div>
           <div className="btn-container">
-            <Button type="reset" onClick={checkOutHandler}>
+            <Button
+              type="reset"
+              onClick={clearCartHandler}
+              state={cartItemCount > 0}
+            >
               Clear Cart{" "}
             </Button>
-            <Button onClick={checkOutHandler}>Checkout </Button>
+            <Button onClick={checkOutHandler} state={cartItemCount > 0}>
+              Checkout{" "}
+            </Button>
           </div>
         </div>
       </div>
