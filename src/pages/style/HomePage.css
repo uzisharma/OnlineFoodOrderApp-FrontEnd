@@ -5,14 +5,17 @@
   justify-content: center;
   height: 80vh;
   width: 800px;
-  /* margin: 100px auto; */
   margin: auto;
   gap: 10px;
   text-align: center;
 }
 
 .homepage-container > h1 {
-  font-size: 5.7rem;
+  /* font-size: 5.7em; */
+  font-size: clamp(4.5em, 9vw, 5.7em);
+}
+.homepage-container > h2{
+  font-size: clamp(1.3em, 3vw, 1.5em);
 }
 
 .start-order-btn {
