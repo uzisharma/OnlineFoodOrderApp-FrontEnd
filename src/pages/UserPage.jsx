@@ -8,7 +8,7 @@ export default function UserPage() {
   const [foodList, setFoodList] = useState([]);
   const [resList, setResList] = useState([]);
   const { setCartItemCount, userDetails } = useRole();
-  const API_URL = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     const url = "http://localhost:8080/api";
     const foodUrl = `${url}/food/getAll`;

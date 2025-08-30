@@ -1,10 +1,38 @@
 import { useLocation } from "react-router";
 import "./style/BillingDetails.css";
+import { Button } from "../components/Input";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useRole } from "../context/RoleContext";
 
 export default function BillingDetails() {
+  const [placed, setPlaced] = useState(false);
   const location = useLocation();
-
+  const API_URL = import.meta.env.VITE_API_URL;
   const { data } = location.state || {};
+  const { setCartItemCount } = useRole();
+
+  const payAndPlace = async (cartId, paymentStatus) => {
+    try {
+      const response = await axios.post(`${API_URL}/place-order/place`, {
+        cartId,
+        paymentStatus,
+      });
+      console.log(response);
+      setCartItemCount(0);
+      setPlaced(true);
+    } catch (err) {
+      if (err.response) {
+        console.error("Backend error : ", err.response.data);
+      } else {
+        console.error("Unexpected error : ", err.message);
+      }
+    }
+  };
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   return (
     <div className="billing-details">
@@ -44,6 +72,15 @@ export default function BillingDetails() {
             <span>{data?.totalAmount}</span>
           </div>
         </div>
+      </div>
+      <div className="footer">
+        {placed ? (
+          <span>Order Placed Successfully</span>
+        ) : (
+          <Button onClick={() => payAndPlace(data?.cartId, "COMPLETED")}>
+            Pay and Place
+          </Button>
+        )}
       </div>
     </div>
   );
