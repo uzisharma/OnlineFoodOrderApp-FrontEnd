@@ -3,11 +3,14 @@ import { useRole } from "../context/RoleContext";
 import { Button } from "../components/Input";
 import "./style/UserCart.css";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 export default function UserCart() {
-  const [cart, setCart] = useState(null);
+  const [cartItem, setCartItem] = useState(null);
+  const [cart, setCart] = useState();
   const API_URL = import.meta.env.VITE_API_URL;
   const { cartItemCount, setCartItemCount, userDetails } = useRole();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!userDetails?.id || cartItemCount < 1) return;
@@ -16,7 +19,8 @@ export default function UserCart() {
         const response = await axios.get(
           `${API_URL}/cart/get/${userDetails?.id}`
         );
-        setCart(response?.data?.data?.userCartItem);
+        setCart(response?.data?.data);
+        setCartItem(response?.data?.data?.userCartItem);
       } catch (err) {
         if (err.response) {
           // 👇 Access your backend ResponseStructure
@@ -32,11 +36,13 @@ export default function UserCart() {
 
   useEffect(() => {
     console.log(cart);
+    // console.log(cartItem);
   }, [cart]);
 
   const checkOutHandler = async (cartId) => {
     try {
       const response = await axios.post(`${API_URL}/checkout/add/${cartId}`);
+      navigate("/billing-details", { state: { data: response?.data?.data } });
     } catch (err) {
       if (err.response) {
         console.error("Backend error : ", err.response.data);
@@ -49,8 +55,8 @@ export default function UserCart() {
   const clearCartHandler = async () => {
     if (cartItemCount < 1) return;
     try {
-      await axios.delete(`${API_URL}/cart/${userDetails?.id}/delete`);
-      setCart({ cartRestaurant: [], cartPrice: 0 });
+      await axios.delete(`${API_URL}/cart-item/${userDetails?.id}/delete`);
+      setCartItem({ cartRestaurant: [], cartPrice: 0 });
       setCartItemCount(0);
     } catch (err) {
       if (err.response) {
@@ -66,8 +72,8 @@ export default function UserCart() {
     <>
       {/* <h2>user cart</h2> */}
       <div className="user-cart">
-        {cart?.cartRestaurant?.length > 0 ? (
-          cart?.cartRestaurant.map((cartLine) => (
+        {cartItem?.cartRestaurant?.length > 0 ? (
+          cartItem?.cartRestaurant.map((cartLine) => (
             <UserCartList key={cartLine?.id} cartLine={cartLine} />
           ))
         ) : (
@@ -76,7 +82,7 @@ export default function UserCart() {
         <div className="bottom-container">
           <div className="total-price">
             <span>Total Price = </span>
-            {cart?.cartPrice}
+            {cartItem?.cartPrice}
           </div>
           <div className="btn-container">
             <Button type="reset" onClick={clearCartHandler}>

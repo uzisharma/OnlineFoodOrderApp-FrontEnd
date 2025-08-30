@@ -1,0 +1,51 @@
+.billing-details {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.bill-card {
+  width: 50vw;
+  min-height: 70vh;
+  padding: 0.5rem 1.5rem;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.bill-card > h1 {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.top > .order-summary {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+}
+
+.order-summary > div {
+  align-self: flex-end;
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+
+  > span:first-child {
+    width: 60%;
+  }
+}
+
+.bill-card > .bottom {
+  width: 12rem;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  text-align: end;
+  > div {
+    padding: 5px 0;
+  }
+}
