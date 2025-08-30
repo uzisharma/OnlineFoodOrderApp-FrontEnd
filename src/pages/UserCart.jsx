@@ -34,7 +34,18 @@ export default function UserCart() {
     console.log(cart);
   }, [cart]);
 
-  const checkOutHandler = () => {};
+  const checkOutHandler = async (cartId) => {
+    try {
+      const response = await axios.post(`${API_URL}/checkout/add/${cartId}`);
+    } catch (err) {
+      if (err.response) {
+        console.error("Backend error : ", err.response.data);
+      } else {
+        console.error("Unexpected error : ", err.message);
+      }
+    }
+  };
+
   const clearCartHandler = async () => {
     if (cartItemCount < 1) return;
     try {
@@ -71,7 +82,7 @@ export default function UserCart() {
             <Button type="reset" onClick={clearCartHandler}>
               Clear Cart{" "}
             </Button>
-            <Button onClick={checkOutHandler}>Checkout </Button>
+            <Button onClick={() => checkOutHandler(cart?.id)}>Checkout </Button>
           </div>
         </div>
       </div>

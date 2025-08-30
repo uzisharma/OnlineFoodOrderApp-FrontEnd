@@ -10,6 +10,7 @@ export default function RestaurantPage() {
   const data = location.state;
 
   const handleAddToCart = async (restaurantId, foodId, quantity) => {
+
     const response = await addToCart(
       userDetails?.id,
       restaurantId,
