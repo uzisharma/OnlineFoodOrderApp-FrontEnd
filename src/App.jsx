@@ -10,6 +10,7 @@ import Layout from "./Layout";
 import RestaurantPage from "./pages/RestaurantPage";
 import UserCart from "./pages/UserCart";
 import BillingDetails from "./pages/BillingDetails";
+import PaymentPage from "./pages/PaymentPage";
 function App() {
   return (
     <>
@@ -25,6 +26,7 @@ function App() {
           <Route path="/res-details" element={<RestaurantPage />} />
           <Route path="/user-cart-details" element={<UserCart />} />
           <Route path="/billing-details" element={<BillingDetails />} />
+          <Route path="/payment" element={<PaymentPage />} />
         </Route>
       </Routes>
     </>
