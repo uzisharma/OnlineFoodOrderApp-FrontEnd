@@ -30,35 +30,26 @@ export default function NavBar() {
         </Link>
       </div>
       <div className="right-container">
-        {role === "admin" ? (
-          <>
-            <Link className="link-element" to="/">
-              HomePage
-            </Link>
-            <Link className="link-element" to="/addRestaurant">
-              Add Restaurant
-            </Link>
-            <Link className="link-element" to="/listRestaurant">
-              View Restaurants
-            </Link>
-            <Link className="link-element" to="/listFood">
-              View Food
-            </Link>
-          </>
-        ) : (
-          <>
-            <SearchBar />
-          </>
-        )}
+        <>
+          <SearchBar />
+        </>
+
         {isLogged ? (
           <>
             <Button type="submit" onClick={handleLogOut}>
               Log-Out
             </Button>
-            <div className="cart-btn" onClick={cartDetailsHandleClick}>
-              <img src={cartIcon} alt={"cartImg"} width={"60"} height={"60"} />
-              <span>{cartItemCount}</span>
-            </div>
+            {role === "user" && (
+              <div className="cart-btn" onClick={cartDetailsHandleClick}>
+                <img
+                  src={cartIcon}
+                  alt={"cartImg"}
+                  width={"60"}
+                  height={"60"}
+                />
+                <span>{cartItemCount}</span>
+              </div>
+            )}
           </>
         ) : (
           <Link className="link-element" to="/login">

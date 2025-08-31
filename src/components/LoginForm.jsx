@@ -3,11 +3,13 @@ import Input, { Button, CheckboxInput } from "./Input";
 import "./style/LoginForm.css";
 import { Link, useNavigate } from "react-router";
 import { useRole } from "../context/RoleContext";
-// import axios from "axios";
+import axios from "axios";
 
-export default function LoginForm({ title, setIsLogin, url }) {
+export default function LoginForm({ title, setIsLogin }) {
   const navigate = useNavigate();
-  const { setCartItemCount,role, setRole, setIsLogged, setUserDetails } = useRole();
+  const { setCartItemCount, role, setRole, setIsLogged, setUserDetails } =
+    useRole();
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const inputDetails = [
     { name: "userName", placeholder: "Username", type: "text" },
@@ -33,29 +35,24 @@ export default function LoginForm({ title, setIsLogin, url }) {
     console.log(e.target.checked);
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const loginUrl = `${url}/login`; // your API endpoint
-      const response = await fetch(loginUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const response = await axios.post(`${API_URL}/${role}/login`, formData);
 
-      if (response.ok) {
-        const data = await response.json();
-        setCartItemCount(data?.data?.totalCartItem || "0");
-        setUserDetails(data?.data)
+      if (response.status === 200) {
+        setCartItemCount(response?.data?.data?.totalCartItem || "0");
+        setUserDetails(response?.data?.data);
         setIsLogged(true);
-        navigate("/user-page");
+
+        role === "user" ? navigate("/user-page") : navigate("/admin-page");
       } else {
         console.log("Login Failed");
         setUserDetails(null);
       }
     } catch (error) {
       console.error("Something went wrong", error);
+      setUserDetails(null);
     }
   };
 

@@ -11,6 +11,7 @@ import RestaurantPage from "./pages/RestaurantPage";
 import UserCart from "./pages/UserCart";
 import BillingDetails from "./pages/BillingDetails";
 import PaymentPage from "./pages/PaymentPage";
+import AdminPage from "./pages/AdminPage";
 function App() {
   return (
     <>
@@ -23,6 +24,7 @@ function App() {
           <Route path="/restaurant-details/:id" element={<EditRestaurant />} />
           <Route path="/login" element={<LoginOrRegister />} />
           <Route path="/user-page" element={<UserPage />} />
+          <Route path="/admin-page" element={<AdminPage />} />
           <Route path="/res-details" element={<RestaurantPage />} />
           <Route path="/user-cart-details" element={<UserCart />} />
           <Route path="/billing-details" element={<BillingDetails />} />

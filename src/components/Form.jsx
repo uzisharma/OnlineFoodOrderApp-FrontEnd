@@ -5,7 +5,6 @@ import "./style/Form.css";
 
 export default function Form({ heading, onSubmit, initialData = {} }) {
   const [formData, setFormData] = useState(initialData);
-  // const [showFoodSelector, setShowFoodSelector] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (key, value) => {
@@ -28,9 +27,6 @@ export default function Form({ heading, onSubmit, initialData = {} }) {
       <h3>{`Add ${heading}`}</h3>
       <form onSubmit={handleSubmit}>
         {Object.entries(formData).map(([key, value]) => {
-          if (key === "id" || key === "createdAt" || key === "updatedAt")
-            return null;
-
           if (typeof value === "object") {
             return;
           }
