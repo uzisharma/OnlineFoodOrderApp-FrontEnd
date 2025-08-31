@@ -1,4 +1,4 @@
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import "./style/BillingDetails.css";
 import { Button } from "../components/Input";
 import { useEffect, useState } from "react";
@@ -9,10 +9,11 @@ export default function BillingDetails() {
   const [placed, setPlaced] = useState(false);
   const location = useLocation();
   const API_URL = import.meta.env.VITE_API_URL;
-  const { data } = location.state || {};
+  const { data, paymentStatus } = location.state || {};
   const { setCartItemCount } = useRole();
+  const navigate = useNavigate();
 
-  const payAndPlace = async (cartId, paymentStatus) => {
+  const placeOrder = async (cartId, paymentStatus) => {
     try {
       const response = await axios.post(`${API_URL}/place-order/place`, {
         cartId,
@@ -31,8 +32,10 @@ export default function BillingDetails() {
   };
 
   useEffect(() => {
-    console.log(data);
-  }, [data]);
+    if (paymentStatus && data?.cartId) {
+      placeOrder(data.cartId, paymentStatus);
+    }
+  }, [paymentStatus, data.cartId]);
 
   return (
     <div className="billing-details">
@@ -77,7 +80,13 @@ export default function BillingDetails() {
         {placed ? (
           <span>Order Placed Successfully</span>
         ) : (
-          <Button onClick={() => payAndPlace(data?.cartId, "COMPLETED")}>
+          <Button
+            onClick={() =>
+              navigate("/payment", {
+                state: { data },
+              })
+            }
+          >
             Pay and Place
           </Button>
         )}

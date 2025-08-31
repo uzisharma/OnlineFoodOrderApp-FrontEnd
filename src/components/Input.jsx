@@ -47,25 +47,15 @@ export function CheckboxInput({ children, onChange }) {
   );
 }
 
-export function SelectInput({ name, value, options, changeFun }) {
+export function SelectInput({ label, value, options, onChange }) {
   return (
     <div className="input-container">
-      {name && (
-        <label htmlFor={name}>
-          {name.charAt(0).toUpperCase() + name.slice(1)}
-        </label>
-      )}
-      <select
-        onChange={(e) => changeFun(e.target.value)}
-        id={name}
-        name={name}
-        value={value}
-        required
-      >
-        <option value={""}>-- Select {name} --</option>
-        {options.map((val) => (
-          <option key={val} value={val}>
-            {val}
+      {label && <label>{label}</label>}
+      <select value={value} onChange={(e) => onChange(e.target.value)} required>
+        <option value="">-- Select {label} --</option>
+        {options.map((opt) => (
+          <option key={opt} value={opt}>
+            {opt}
           </option>
         ))}
       </select>
