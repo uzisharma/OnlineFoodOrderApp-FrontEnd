@@ -5,102 +5,102 @@ import { Button } from "./Input";
 import editIcon from "../assets/editIcon.png";
 import deleteIcon from "../assets/deleteIcon.png";
 
+
 export default function Table({
-  resList,
-  setResList,
   title,
-  url,
+  fetchDataFn,
+  deleteDataFn,
   handleNavigate,
-  handleDelete,
-  onClick,
   refreshTrigger,
 }) {
-  const [received, setReceived] = useState({});
-  const [baseUrl, setBaseUrl] = useState(url);
+  const [received, setReceived] = useState([]);
+  const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const size = 10;
+
+  // sorting state only
+  const [sortBy, setSortBy] = useState("id");
+  const [sortDir, setSortDir] = useState("asc");
 
   useEffect(() => {
-    const fetchData = async () => {
+    const loadData = async () => {
       try {
-        const response = await fetch(baseUrl);
-        const data = await response.json();
-        setReceived(data.data);
-        setResList(data.data.content);
-        console.log(data);
+        const data = await fetchDataFn({
+          page,
+          size,
+          sortBy,
+          sortDir,
+        });
+        setReceived(data.data.content || []);
+        setTotalPages(data?.data?.totalPages || 0);
+        console.log(data.data);
       } catch (error) {
-        console.log(
-          "Failed to fetch data, please start the SpringBootApplication",
-          error
-        );
+        console.error("Failed to fetch data", error);
       }
     };
-    fetchData();
-  }, [setResList, baseUrl, refreshTrigger]);
 
-  const safeResList = Array.isArray(resList) ? resList : [];
-  const columnHeader = resList.length > 0 ? Object.keys(safeResList[0]) : [];
+    loadData();
+  }, [page, sortBy, sortDir, refreshTrigger, fetchDataFn, totalPages]);
 
-  // Utility function to capitalize first letter
+  const columnHeader = received.length > 0 ? Object.keys(received[0]) : [];
+
   const formatHeader = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+  const handleSort = (col) => {
+    if (sortBy === col) {
+      setSortDir(sortDir === "asc" ? "desc" : "asc");
+    } else {
+      setSortBy(col);
+      setSortDir("asc");
+    }
+  };
 
   return (
     <div className="table-container">
       <header>
         <h1>{title}</h1>
       </header>
+
       <table>
         <thead>
           <tr>
             {columnHeader.map((colName) => (
-              <th key={colName}>{formatHeader(colName)}</th>
+              <th key={colName} onClick={() => handleSort(colName)}>
+                {formatHeader(colName)}
+                {sortBy === colName && (sortDir === "asc" ? " 🔼" : " 🔽")}
+              </th>
             ))}
             <th>Edit</th>
             <th>Delete</th>
           </tr>
         </thead>
         <tbody>
-          {safeResList.map((row, index) => (
+          {received.map((row, index) => (
             <tr key={index}>
               {columnHeader.map((colName) => {
                 const cell = row[colName];
-
-                if (typeof cell === "object" && cell !== null) {
-                  return (
-                    <td key={colName}>
-                      <Button
-                        // label={colName}
-                        onClick={() => onClick(row, colName)}
-                      >
-                        {colName}
-                      </Button>
-                    </td>
-                  );
-                }
-
                 return <td key={colName}>{cell ?? "N/A"}</td>;
               })}
-              <td key={index}>
+              <td>
                 <Button type="edit" onClick={() => handleNavigate(row)}>
-                  {<img src={editIcon} alt="Edit" width={24} height={24} />}
+                  <img src={editIcon} alt="Edit" width={24} height={24} />
                 </Button>
               </td>
-              <td key={index + 1}>
-                <Button
-                  type="delete"
-                  label={deleteIcon}
-                  onClick={() => handleDelete(row)}
-                >
-                  {<img src={deleteIcon} alt="delete" width={24} height={24} />}
+              <td>
+                <Button type="delete" onClick={() => deleteDataFn(row?.id)}>
+                  <img src={deleteIcon} alt="delete" width={24} height={24} />
                 </Button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+
       <div className="page-nav-container">
         <PageNavigation
           totalPages={received.totalPages}
-          url={url}
-          setBaseUrl={setBaseUrl}
+          currentPage={page}
+          onPageChange={setPage}
         />
       </div>
     </div>

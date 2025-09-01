@@ -3,12 +3,12 @@ import { useState } from "react";
 import Form from "../components/Form";
 import "./style/EditRestaurant.css";
 import UnifiedModal from "../components/UnifiedModal"; // ✅ use unified modal
+import { updateRestaurantById } from "../service/restaurantService";
 
 export default function EditRestaurant() {
   const { id } = useParams();
   const location = useLocation();
-  const row = location.state?.row;
-  const url = location.state?.editResUrl;
+  const row = location.state?.data;
   const navigate = useNavigate();
 
   // UnifiedModal Control
@@ -17,23 +17,10 @@ export default function EditRestaurant() {
   const [modalType, setModalType] = useState("success"); // success | error
 
   const handleSubmit = (updatedData) => {
-    const updatedUrl = `${url}${id}`; // ensure slash in url if required
-
-    fetch(updatedUrl, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedData),
-    })
+    console.log(updatedData);
+    updateRestaurantById(id, updatedData)
       .then((res) => {
-        if (!res.ok) {
-          throw new Error("Failed to update");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        console.log("Update Success", data);
+        console.log("Update Success", res.data);
         setModalMsg("Restaurant updated successfully!");
         setModalType("success");
         setIsModalOpen(true);

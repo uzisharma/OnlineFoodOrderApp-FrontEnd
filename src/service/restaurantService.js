@@ -1,14 +1,34 @@
-import api from "./axiosConfig"; // axios instance (with interceptors)
+import api from "./axiosConfig"; // axios instance with interceptors
 
-export const fetchRestaurants = async (url) => {
-  const response = await api.get(url);
+// Fetch restaurants with pagination, sorting, and search
+export const getAllRestaurant = async ({
+  page = 0,
+  size = 10,
+  sortBy = "id",
+  sortDir = "asc",
+  search = "",
+} = {}) => {
+  const response = await api.get("/restaurant/getAll", {
+    params: {
+      page,
+      size,
+      sortBy,
+      sortDir,
+      search,
+    },
+  });
   return response.data;
 };
 
 export const saveRestaurant = async (restaurantData) => {
-  return await api.post("/restaurant/api/save", restaurantData);
+  return await api.post("/restaurant/save", restaurantData);
 };
 
-export const deleteRestaurant = async (id) => {
-  return await api.delete(`/restaurant/api/delete/${id}`);
+export const deleteRestaurantById = async (id) => {
+  console.log(id);
+  return await api.delete(`/restaurant/${id}/delete`);
+};
+
+export const updateRestaurantById = async (id, updatedData) => {
+  return await api.put(`/restaurant/update?id=${id}`, updatedData);
 };
