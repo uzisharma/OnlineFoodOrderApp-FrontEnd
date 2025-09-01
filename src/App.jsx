@@ -13,6 +13,7 @@ import BillingDetails from "./pages/BillingDetails";
 import PaymentPage from "./pages/PaymentPage";
 import AdminPage from "./pages/AdminPage";
 import AddFood from "./pages/AddFood";
+import UserList from "./pages/UserList";
 function App() {
   return (
     <>
@@ -33,6 +34,7 @@ function App() {
             <Route path="/admin/restaurant/add" element={<AddRestaurant />} />
             <Route path="/admin/food" element={<FoodList />} />
             <Route path="/admin/food/add" element={<AddFood />} />
+            <Route path="/admin/users" element={<UserList />} />
           </Route>
         </Route>
       </Routes>
