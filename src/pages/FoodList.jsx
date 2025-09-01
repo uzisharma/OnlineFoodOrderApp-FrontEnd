@@ -2,6 +2,7 @@ import { useState } from "react";
 import Table from "../components/Table";
 import EditModal from "../components/EditModal";
 import StatusModal from "../components/StatusModal";
+import "./style/FoodList.css";
 
 export default function FoodList() {
   const [resList, setResList] = useState([]);
@@ -48,7 +49,7 @@ export default function FoodList() {
   };
 
   return (
-    <>
+    <div className="foodAll-list">
       <title>Food List</title>
       <Table
         title={"Food"}
@@ -78,6 +79,6 @@ export default function FoodList() {
           message={message}
         />
       )}
-    </>
+    </div>
   );
 }

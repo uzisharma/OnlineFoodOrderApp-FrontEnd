@@ -80,7 +80,7 @@ export default function Table({
               })}
               <td key={index}>
                 <Button type="edit" onClick={() => handleNavigate(row)}>
-                  {<img src={editIcon} alt="Edit" width={30} height={30} />}
+                  {<img src={editIcon} alt="Edit" width={24} height={24} />}
                 </Button>
               </td>
               <td key={index + 1}>
@@ -89,7 +89,7 @@ export default function Table({
                   label={deleteIcon}
                   onClick={() => handleDelete(row)}
                 >
-                  {<img src={deleteIcon} alt="delete" width={30} height={30} />}
+                  {<img src={deleteIcon} alt="delete" width={24} height={24} />}
                 </Button>
               </td>
             </tr>

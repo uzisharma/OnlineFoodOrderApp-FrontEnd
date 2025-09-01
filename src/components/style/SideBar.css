@@ -1,14 +1,16 @@
 /* Sidebar container */
 .sidebar {
   width: 240px;
+  flex-shrink: 0;
   height: 90vh;
   background-color: #1e293b; /* dark slate */
   color: #f8fafc; /* near white */
   padding: 20px;
-  position: fixed;
+  position: relative;
   left: 0;
   overflow-y: auto;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+
 }
 
 /* Section titles */

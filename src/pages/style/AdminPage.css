@@ -2,15 +2,14 @@
   display: flex; /* sidebar + content side by side */
   position: relative;
   width: 100vw;
+  overflow-y: hidden;
 }
 
 .admin-content {
-  flex: 1; /* take up remaining width */
-  margin-left: 150px; /* same as sidebar width */
+   flex: 1;/* take up remaining width */
   padding: 10px;
   background-color: #ffffff; /* white content area */
   overflow-y: auto; /* scroll inside content if needed */
-  background-color: red;
   display: flex;
   align-items: center;
   justify-content: center;
