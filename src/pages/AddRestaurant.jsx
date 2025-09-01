@@ -16,6 +16,9 @@ export default function AddRestaurant() {
       email: formData.email,
       contactNumber: formData.contactNumber,
       address: formData.address,
+      rating: formData.rating,
+      deliveryTime: formData.deliveryTime,
+      deliveryCharges: formData.deliveryCharges,
     };
 
     try {

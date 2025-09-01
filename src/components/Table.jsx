@@ -6,14 +6,7 @@ import editIcon from "../assets/editIcon.png";
 import deleteIcon from "../assets/deleteIcon.png";
 
 
-export default function Table({
-  title,
-  fetchDataFn,
-  deleteDataFn,
-  handleNavigate,
-  refreshTrigger,
-  setRefreshTrigger,
-}) {
+export default function Table({ title, fetchDataFn, deleteDataFn, handleNavigate }) {
   const [received, setReceived] = useState([]);
 
   const [page, setPage] = useState(0);
@@ -42,7 +35,7 @@ export default function Table({
     };
 
     loadData();
-  }, [page, sortBy, sortDir, refreshTrigger, fetchDataFn, totalPages]);
+  }, [page, sortBy, sortDir, fetchDataFn, totalPages]);
 
   const columnHeader = received.length > 0 ? Object.keys(received[0]) : [];
 
@@ -91,9 +84,15 @@ export default function Table({
               <td>
                 <Button
                   type="delete"
-                  onClick={() => {
-                    setRefreshTrigger((prev) => prev + 1);
-                    deleteDataFn(row?.id);
+                  onClick={async () => {
+                    try {
+                      await deleteDataFn(row?.id); // ✅ wait for delete to finish
+                      setReceived((prev) =>
+                        prev.filter((item) => item.id !== row.id)
+                      ); // ✅ update state locally
+                    } catch (err) {
+                      console.error("Failed to delete:", err);
+                    }
                   }}
                 >
                   <img src={deleteIcon} alt="delete" width={24} height={24} />

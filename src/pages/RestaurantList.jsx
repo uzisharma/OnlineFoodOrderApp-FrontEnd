@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router";
-import { useState } from "react";
 import Table from "../components/Table";
 import "./style/RestaurantList.css";
 import {
@@ -9,7 +8,6 @@ import {
 
 export default function RestaurantList() {
   const navigate = useNavigate();
-  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   const handleNavigate = (data) => {
     navigate(`/admin/restaurant/update/${data.id}`, { state: { data } });
@@ -23,8 +21,6 @@ export default function RestaurantList() {
         handleNavigate={handleNavigate}
         fetchDataFn={getAllRestaurant}
         deleteDataFn={deleteRestaurantById}
-        refreshTrigger={refreshTrigger}
-        setRefreshTrigger={setRefreshTrigger}
       />
     </div>
   );
