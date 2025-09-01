@@ -1,0 +1,12 @@
+.admin-page {
+  display: flex; /* sidebar + content side by side */
+  position: relative;
+}
+
+.admin-content {
+  flex: 1; /* take up remaining width */
+  margin-left: 150px; /* same as sidebar width */
+  padding: 10px;
+  background-color: #ffffff; /* white content area */
+  overflow-y: auto; /* scroll inside content if needed */
+}

@@ -18,17 +18,20 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path="/addRestaurant" element={<AddRestaurant />} />
-          <Route path="/listRestaurant" element={<RestaurantList />} />
-          <Route path="/listFood" element={<FoodList />} />
           <Route path="/restaurant-details/:id" element={<EditRestaurant />} />
           <Route path="/login" element={<LoginOrRegister />} />
           <Route path="/user-page" element={<UserPage />} />
-          <Route path="/admin-page" element={<AdminPage />} />
           <Route path="/res-details" element={<RestaurantPage />} />
           <Route path="/user-cart-details" element={<UserCart />} />
           <Route path="/billing-details" element={<BillingDetails />} />
           <Route path="/payment" element={<PaymentPage />} />
+
+          {/* Admin Layout */}
+          <Route path="admin" element={<AdminPage />}>
+            <Route path="/admin/restaurants" element={<RestaurantList />} />
+            <Route path="/admin/restaurant/add" element={<AddRestaurant />} />
+            <Route path="/admin/food" element={<FoodList />} />
+          </Route>
         </Route>
       </Routes>
     </>

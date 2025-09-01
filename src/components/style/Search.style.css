@@ -1,9 +1,8 @@
 .search-container {
   display: flex;
-  width: 100%;
   position: absolute;
+  right: 0;
   justify-content: end;
-  /* background-color: red; */
 }
 
 .search-container > select {
@@ -12,6 +11,7 @@
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   outline: none;
+  margin-right: 10px;
 }
 .search-container > input {
   border-top-left-radius: 0;
