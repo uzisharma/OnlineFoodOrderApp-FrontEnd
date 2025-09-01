@@ -1,6 +1,6 @@
-import Form from "../components/Form";
-import UnifiedModal from "../components/UnifiedModal";
-import { saveRestaurant } from "../service/restaurantService";
+import Form from "../../../components/Form";
+import UnifiedModal from "../../../components/UnifiedModal";
+import { saveRestaurant } from "../../../service/restaurantService";
 import { useState } from "react";
 
 export default function AddRestaurant() {

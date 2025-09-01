@@ -1,6 +1,6 @@
-import Table from "../components/Table";
+import Table from "../../../components/Table";
 import "./style/FoodList.css";
-import { getAllFood, deleteFoodById } from "../service/foodService";
+import { getAllFood, deleteFoodById } from "../../../service/foodService";
 import { useNavigate } from "react-router";
 
 export default function FoodList() {

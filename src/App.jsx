@@ -1,21 +1,26 @@
 import { Routes, Route } from "react-router";
 import HomePage from "./pages/HomePage";
-import AddRestaurant from "./pages/AddRestaurant";
-import RestaurantList from "./pages/RestaurantList";
-import EditRestaurant from "./pages/EditRestaurant";
-import FoodList from "./pages/FoodList";
-import LoginOrRegister from "./pages/LoginOrRegister";
-import UserPage from "./pages/UserPage";
 import Layout from "./Layout";
-import RestaurantPage from "./pages/RestaurantPage";
-import UserCart from "./pages/UserCart";
-import BillingDetails from "./pages/BillingDetails";
-import PaymentPage from "./pages/PaymentPage";
-import AdminPage from "./pages/AdminPage";
-import AddFood from "./pages/AddFood";
-import UserList from "./pages/UserList";
-import EditFood from "./pages/EditFood";
-import EditUser from "./pages/EditUser";
+import LoginOrRegister from "./pages/LoginOrRegister";
+
+import UserPage from "./pages/user/UserPage";
+import RestaurantPage from "./pages/user/RestaurantPage";
+import UserCart from "./pages/user/UserCart";
+import BillingDetails from "./pages/user/BillingDetails";
+import PaymentPage from "./pages/user/PaymentPage";
+
+import AddRestaurant from "./pages/admin/restaurant/AddRestaurant";
+import RestaurantList from "./pages/admin/restaurant/RestaurantList";
+import EditRestaurant from "./pages/admin/restaurant/EditRestaurant";
+
+import AdminPage from "./pages/admin/admin/AdminPage";
+
+import AddFood from "./pages/admin/food/AddFood";
+import EditFood from "./pages/admin/food/EditFood";
+import FoodList from "./pages/admin/food/FoodList";
+
+import UserList from "./pages/admin/user/UserList";
+import EditUser from "./pages/admin/user/EditUser";
 function App() {
   return (
     <>

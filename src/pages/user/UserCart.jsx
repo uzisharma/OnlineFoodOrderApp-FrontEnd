@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useRole } from "../context/RoleContext";
-import { Button } from "../components/Input";
+import { useRole } from "../../context/RoleContext";
+import { Button } from "../../components/Input";
 import "./style/UserCart.css";
 import axios from "axios";
 import { useNavigate } from "react-router";

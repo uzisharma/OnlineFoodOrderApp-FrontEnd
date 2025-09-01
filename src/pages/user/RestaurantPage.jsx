@@ -1,8 +1,8 @@
 import { useLocation } from "react-router";
 import "./style/RestaurantPage.css";
-import { FoodCard } from "../components/Card";
-import { useRole } from "../context/RoleContext";
-import { addToCart } from "../service/cartService";
+import { FoodCard } from "../../components/Card";
+import { useRole } from "../../context/RoleContext";
+import { addToCart } from "../../service/cartService";
 
 export default function RestaurantPage() {
   const location = useLocation();
@@ -10,7 +10,6 @@ export default function RestaurantPage() {
   const data = location.state;
 
   const handleAddToCart = async (restaurantId, foodId, quantity) => {
-
     const response = await addToCart(
       userDetails?.id,
       restaurantId,

@@ -1,6 +1,6 @@
-import Form from "../components/Form";
-import { saveFood } from "../service/foodService";
-import UnifiedModal from "../components/UnifiedModal";
+import Form from "../../../components/Form";
+import { saveFood } from "../../../service/foodService";
+import UnifiedModal from "../../../components/UnifiedModal";
 
 import { useState } from "react";
 

@@ -1,7 +1,8 @@
 import "./style/UserList.css";
+
 import { useNavigate } from "react-router";
-import { getAllUser, deleteUserById } from "../service/userService";
-import Table from "../components/Table";
+import { getAllUser, deleteUserById } from "../../../service/userService";
+import Table from "../../../components/Table";
 
 export default function UserList() {
   const navigate = useNavigate();

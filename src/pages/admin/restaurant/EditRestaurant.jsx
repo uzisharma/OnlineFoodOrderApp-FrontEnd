@@ -1,9 +1,9 @@
 import { useLocation, useNavigate, useParams } from "react-router";
 import { useState } from "react";
-import Form from "../components/Form";
+import Form from "../../../components/Form";
 import "./style/EditRestaurant.css";
-import UnifiedModal from "../components/UnifiedModal"; // ✅ use unified modal
-import { updateRestaurantById } from "../service/restaurantService";
+import UnifiedModal from "../../../components/UnifiedModal"; // ✅ use unified modal
+import { updateRestaurantById } from "../../../service/restaurantService";
 
 export default function EditRestaurant() {
   const { id } = useParams();

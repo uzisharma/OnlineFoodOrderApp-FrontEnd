@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router";
-import Table from "../components/Table";
+import Table from "../../../components/Table";
 import "./style/RestaurantList.css";
 import {
   getAllRestaurant,
   deleteRestaurantById,
-} from "../service/restaurantService";
+} from "../../../service/restaurantService";
 
 export default function RestaurantList() {
   const navigate = useNavigate();
