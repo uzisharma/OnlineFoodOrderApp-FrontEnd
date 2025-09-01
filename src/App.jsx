@@ -14,6 +14,8 @@ import PaymentPage from "./pages/PaymentPage";
 import AdminPage from "./pages/AdminPage";
 import AddFood from "./pages/AddFood";
 import UserList from "./pages/UserList";
+import EditFood from "./pages/EditFood";
+import EditUser from "./pages/EditUser";
 function App() {
   return (
     <>
@@ -38,7 +40,9 @@ function App() {
             />
             <Route path="/admin/food" element={<FoodList />} />
             <Route path="/admin/food/add" element={<AddFood />} />
+            <Route path="/admin/food/update/:id" element={<EditFood />} />
             <Route path="/admin/users" element={<UserList />} />
+            <Route path="/admin/user/update/:id" element={<EditUser />} />
           </Route>
         </Route>
       </Routes>

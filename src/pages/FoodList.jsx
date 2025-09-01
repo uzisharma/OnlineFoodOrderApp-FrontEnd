@@ -1,11 +1,14 @@
 import Table from "../components/Table";
 import "./style/FoodList.css";
 import { getAllFood, deleteFoodById } from "../service/foodService";
+import { useNavigate } from "react-router";
 
 export default function FoodList() {
-  // const [refreshTrigger, setRefreshTrigger] = useState(0); // ✅ trigger for Table
+  const navigate = useNavigate();
 
-  const handleNavigate = () => {};
+  const handleNavigate = (data) => {
+    navigate(`/admin/food/update/${data.id}`, { state: { data } });
+  };
 
   return (
     <div className="foodAll-list">
