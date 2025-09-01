@@ -12,8 +12,10 @@ export default function Table({
   deleteDataFn,
   handleNavigate,
   refreshTrigger,
+  setRefreshTrigger,
 }) {
   const [received, setReceived] = useState([]);
+
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const size = 10;
@@ -87,7 +89,13 @@ export default function Table({
                 </Button>
               </td>
               <td>
-                <Button type="delete" onClick={() => deleteDataFn(row?.id)}>
+                <Button
+                  type="delete"
+                  onClick={() => {
+                    setRefreshTrigger((prev) => prev + 1);
+                    deleteDataFn(row?.id);
+                  }}
+                >
                   <img src={deleteIcon} alt="delete" width={24} height={24} />
                 </Button>
               </td>

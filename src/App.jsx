@@ -20,7 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path="/restaurant-details/:id" element={<EditRestaurant />} />
+          {/* <Route path="/restaurant-details/:id" element={<EditRestaurant />} /> */}
           <Route path="/login" element={<LoginOrRegister />} />
           <Route path="/user-page" element={<UserPage />} />
           <Route path="/res-details" element={<RestaurantPage />} />
@@ -32,6 +32,10 @@ function App() {
           <Route path="admin" element={<AdminPage />}>
             <Route path="/admin/restaurants" element={<RestaurantList />} />
             <Route path="/admin/restaurant/add" element={<AddRestaurant />} />
+            <Route
+              path="/admin/restaurant/update/:id"
+              element={<EditRestaurant />}
+            />
             <Route path="/admin/food" element={<FoodList />} />
             <Route path="/admin/food/add" element={<AddFood />} />
             <Route path="/admin/users" element={<UserList />} />

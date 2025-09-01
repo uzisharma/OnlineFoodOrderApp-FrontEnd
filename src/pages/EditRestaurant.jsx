@@ -47,6 +47,7 @@ export default function EditRestaurant() {
         {row ? (
           <Form
             heading={"Restaurant"}
+            formType={"Edit"}
             onSubmit={handleSubmit}
             initialData={row}
           />

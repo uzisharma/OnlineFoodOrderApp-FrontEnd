@@ -1,11 +1,21 @@
-import { useState } from "react";
-import Input, { Button } from "./Input";
+import { useEffect, useState } from "react";
+import Input from "./Input";
 import { useNavigate } from "react-router";
 import "./style/Form.css";
 
-export default function Form({ heading, onSubmit, initialData = {} }) {
+export default function Form({
+  heading,
+  formType,
+  onSubmit,
+  initialData = {},
+  resetKey,
+}) {
   const [formData, setFormData] = useState(initialData);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setFormData(initialData);
+  }, [resetKey, initialData]);
 
   const handleChange = (key, value) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
@@ -17,18 +27,35 @@ export default function Form({ heading, onSubmit, initialData = {} }) {
   };
 
   const cancelHandler = () => {
-    // navigate("/listRestaurant");
-    console.log(`/list${heading}`);
-    navigate(`/list${heading}`);
+    navigate(-1);
   };
 
   return (
     <div className="form-container">
-      <h3>{`Add ${heading}`}</h3>
+      <h3>{`${formType} ${heading}`}</h3>
       <form onSubmit={handleSubmit}>
         {Object.entries(formData).map(([key, value]) => {
-          if (typeof value === "object") {
+          if (typeof value === "object" || key === "id") {
             return;
+          }
+
+          // 👇 special case for address → textarea
+          if (key === "address") {
+            return (
+              <div key={key} className="input-container">
+                <label htmlFor={key}>
+                  {key.charAt(0).toUpperCase() + key.slice(1)}
+                </label>
+                <textarea
+                  id={key}
+                  name={key}
+                  rows={4}
+                  value={value}
+                  onChange={(e) => handleChange(key, e.target.value)}
+                  placeholder="Enter address"
+                />
+              </div>
+            );
           }
 
           return (

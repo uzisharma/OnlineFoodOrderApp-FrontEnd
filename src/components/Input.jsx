@@ -17,6 +17,7 @@ export default function Input({
           {name.charAt(0).toUpperCase() + name.slice(1)}
         </label>
       )}
+
       <input
         type={type}
         placeholder={placeholder}

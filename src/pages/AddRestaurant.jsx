@@ -1,8 +1,14 @@
 import Form from "../components/Form";
-import { useNavigate } from "react-router";
+import UnifiedModal from "../components/UnifiedModal";
+import { saveRestaurant } from "../service/restaurantService";
+import { useState } from "react";
 
 export default function AddRestaurant() {
-  const navigate = useNavigate();
+  // UnifiedModal Control
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMsg, setModalMsg] = useState("");
+  const [modalType, setModalType] = useState("success"); // success | error
+  const [resetFormKey, setResetFromKey] = useState(0);
 
   const handleSubmit = async (formData) => {
     const restaurantData = {
@@ -13,34 +19,38 @@ export default function AddRestaurant() {
     };
 
     try {
-      const response = await fetch(
-        "http://localhost:8080/restaurant/api/save",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(restaurantData),
-        }
-      );
+      const response = await saveRestaurant(restaurantData);
 
-      if (response.ok) {
-        const result = await response.json();
-        console.log("Restaurant saved:", result);
-        navigate("/listRestaurant"); // redirect to list page after successful add
+      if (response.status >= 200 && response.status < 300) {
+        setModalMsg("Restaurant Added successfully!");
+        setModalType("success");
+        setIsModalOpen(true);
+        setResetFromKey((prev) => prev + 1);
+        console.log("Restaurant saved:", response.data);
       } else {
-        console.error("Error saving restaurant:", response.status);
+        setModalMsg("Failed!");
+        setModalType("error");
+        setIsModalOpen(true);
       }
     } catch (error) {
-      console.error("Network error:", error);
+      setModalMsg("Failed! Something went wrong");
+      setModalType("error");
+      setIsModalOpen(true);
+      console.error("Error saving restaurant:", error);
     }
   };
 
+  const handleOnClose = () => {
+    setIsModalOpen(false);
+  };
   const initialData = {
     restaurantName: "",
     email: "",
     contactNumber: "",
     address: "",
+    rating: "",
+    deliveryTime: "",
+    deliveryCharges: "",
   };
 
   return (
@@ -48,8 +58,18 @@ export default function AddRestaurant() {
       <title>Add Restaurant</title>
       <Form
         heading="Restaurant"
+        formType={"Add"}
         onSubmit={handleSubmit}
         initialData={initialData}
+        resetKey={resetFormKey}
+      />
+      <UnifiedModal
+        isOpen={isModalOpen}
+        onClose={handleOnClose}
+        mode="status"
+        type={modalType}
+        title={modalType === "success" ? "Success" : "Error"}
+        message={modalMsg}
       />
     </>
   );
