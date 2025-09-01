@@ -5,7 +5,7 @@ export default function Sidebar() {
   const sideComponent = {
     restaurant: [
       { label: "List Restaurant", path: "/admin/restaurants" },
-      { label: "Add Restaurant", path: "/admin/restaurants/add" },
+      { label: "Add Restaurant", path: "/admin/restaurant/add" },
     ],
     food: [
       { label: "List Food", path: "/admin/food" },

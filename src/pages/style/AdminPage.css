@@ -1,6 +1,7 @@
 .admin-page {
   display: flex; /* sidebar + content side by side */
   position: relative;
+  width: 100vw;
 }
 
 .admin-content {
@@ -9,4 +10,8 @@
   padding: 10px;
   background-color: #ffffff; /* white content area */
   overflow-y: auto; /* scroll inside content if needed */
+  background-color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
