@@ -74,7 +74,16 @@ export default function Table({ title, fetchDataFn, deleteDataFn, handleNavigate
             <tr key={index}>
               {columnHeader.map((colName) => {
                 const cell = row[colName];
-                return <td key={colName}>{cell ?? "N/A"}</td>;
+                {
+                  /* return <td key={colName}>{cell ?? "N/A"}</td>; */
+                }
+                return (
+                  <td key={colName}>
+                    {typeof cell === "object" && cell !== null
+                      ? "N/A" // or customize display
+                      : cell ?? "N/A"}
+                  </td>
+                );
               })}
               <td>
                 <Button type="edit" onClick={() => handleNavigate(row)}>

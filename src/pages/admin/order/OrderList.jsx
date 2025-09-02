@@ -1,9 +1,8 @@
 import Table from "../../../components/Table";
-import "./style/FoodList.css";
-import { getAllFood, deleteFoodById } from "../../../service/foodService";
+import { getAllOrder, deleteOrderById } from "../../../service/orderService";
 import { useNavigate } from "react-router";
 
-export default function FoodList() {
+export default function OrderList() {
   const navigate = useNavigate();
 
   const handleNavigate = (data) => {
@@ -12,12 +11,12 @@ export default function FoodList() {
 
   return (
     <div className="all-list">
-      <title>Food List</title>
+      <title>Order List</title>
       <Table
-        title={"Food"}
+        title={"Order"}
         handleNavigate={handleNavigate}
-        fetchDataFn={getAllFood}
-        deleteDataFn={deleteFoodById}
+        fetchDataFn={getAllOrder}
+        deleteDataFn={deleteOrderById}
       />
     </div>
   );

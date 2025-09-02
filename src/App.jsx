@@ -21,6 +21,7 @@ import FoodList from "./pages/admin/food/FoodList";
 
 import UserList from "./pages/admin/user/UserList";
 import EditUser from "./pages/admin/user/EditUser";
+import OrderList from "./pages/admin/order/OrderList";
 function App() {
   return (
     <>
@@ -48,6 +49,7 @@ function App() {
             <Route path="/admin/food/update/:id" element={<EditFood />} />
             <Route path="/admin/users" element={<UserList />} />
             <Route path="/admin/user/update/:id" element={<EditUser />} />
+            <Route path="/admin/orders" element={<OrderList />} />
           </Route>
         </Route>
       </Routes>
