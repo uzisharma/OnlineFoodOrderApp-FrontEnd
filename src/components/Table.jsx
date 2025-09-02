@@ -4,10 +4,16 @@ import PageNavigation from "./PageNavigation";
 import { Button } from "./Input";
 import editIcon from "../assets/editIcon.png";
 import deleteIcon from "../assets/deleteIcon.png";
+import { useNavigate } from "react-router";
 
-
-export default function Table({ title, fetchDataFn, deleteDataFn, handleNavigate }) {
+export default function Table({
+  title,
+  fetchDataFn,
+  deleteDataFn,
+  handleNavigate,
+}) {
   const [received, setReceived] = useState([]);
+  const navigate = useNavigate();
 
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
@@ -26,7 +32,7 @@ export default function Table({ title, fetchDataFn, deleteDataFn, handleNavigate
           sortBy,
           sortDir,
         });
-        setReceived(data.data.content || []);
+        setReceived(data?.data?.content || []);
         setTotalPages(data?.data?.totalPages || 0);
         console.log(data.data);
       } catch (error) {
@@ -54,6 +60,11 @@ export default function Table({ title, fetchDataFn, deleteDataFn, handleNavigate
     <div className="table-container">
       <header>
         <h1>{title}</h1>
+        <div className="header-back-btn">
+          <Button type="reset" onClick={() => navigate(-1)}>
+            👈 Go Back
+          </Button>
+        </div>
       </header>
 
       <table>

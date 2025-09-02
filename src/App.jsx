@@ -22,6 +22,9 @@ import FoodList from "./pages/admin/food/FoodList";
 import UserList from "./pages/admin/user/UserList";
 import EditUser from "./pages/admin/user/EditUser";
 import OrderList from "./pages/admin/order/OrderList";
+import CartList from "./pages/admin/cart/CartList";
+import CartDetails from "./components/CartDetails";
+import AddUser from "./pages/admin/user/AddUser";
 function App() {
   return (
     <>
@@ -48,8 +51,15 @@ function App() {
             <Route path="/admin/food/add" element={<AddFood />} />
             <Route path="/admin/food/update/:id" element={<EditFood />} />
             <Route path="/admin/users" element={<UserList />} />
+            <Route path="/admin/user/add" element={<AddUser />} />
             <Route path="/admin/user/update/:id" element={<EditUser />} />
+            <Route
+              path="cart/cart-details/userId/:id"
+              element={<CartDetails />}
+            />
             <Route path="/admin/orders" element={<OrderList />} />
+
+            <Route path="/admin/cart" element={<CartList />} />
           </Route>
         </Route>
       </Routes>

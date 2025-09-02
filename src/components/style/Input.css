@@ -81,6 +81,10 @@ button {
 
 button[type="reset"] {
   background-color: #6c757d;
+
+  &:hover{
+  background-color: #5a6268;
+  }
 }
 
 
@@ -99,7 +103,3 @@ button img {
   }
 }
 
-
-button[type="reset"]:hover {
-  background-color: #5a6268;
-}

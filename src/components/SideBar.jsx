@@ -12,7 +12,10 @@ export default function Sidebar() {
       { label: "Add Food", path: "/admin/food/add" },
     ],
     admin: [{ label: "Manage Admins", path: "/admin/admins" }],
-    user: [{ label: "List Users", path: "/admin/users" }],
+    user: [
+      { label: "List Users", path: "/admin/users" },
+      { label: "Add User", path: "/admin/user/add" },
+    ],
     cart: [{ label: "View Cart", path: "/admin/cart" }],
     checkout: [{ label: "Checkout Details", path: "/admin/checkout" }],
     order: [{ label: "All Orders", path: "/admin/orders" }],
