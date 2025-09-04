@@ -11,13 +11,13 @@ export default function Sidebar() {
       { label: "List Food", path: "/admin/food" },
       { label: "Add Food", path: "/admin/food/add" },
     ],
-    admin: [{ label: "Manage Admins", path: "/admin/admins" }],
+    admin: [{ label: "Manage Admins", path: "/admin/manage-admin" }],
     user: [
       { label: "List Users", path: "/admin/users" },
       { label: "Add User", path: "/admin/user/add" },
     ],
     cart: [{ label: "View Cart", path: "/admin/cart" }],
-    checkout: [{ label: "Checkout Details", path: "/admin/checkout" }],
+    // checkout: [{ label: "Checkout Details", path: "/admin/checkout" }],
     order: [{ label: "All Orders", path: "/admin/orders" }],
   };
 

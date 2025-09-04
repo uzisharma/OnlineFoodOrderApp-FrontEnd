@@ -26,3 +26,7 @@ export const deleteOrderById = async (id) => {
 export const updateOrderById = async (id, updatedFoodData) => {
   return api.put(`/place-order/update?id=${id}`, updatedFoodData);
 };
+
+export const getOrderById = async (id) => {
+  return api.get(`/place-order/get/${id}`);
+};

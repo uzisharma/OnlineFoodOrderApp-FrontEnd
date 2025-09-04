@@ -13,7 +13,7 @@ export default function OrderList() {
     <div className="all-list">
       <title>Order List</title>
       <Table
-        title={"Order"}
+        title={"order"}
         handleNavigate={handleNavigate}
         fetchDataFn={getAllOrder}
         deleteDataFn={deleteOrderById}

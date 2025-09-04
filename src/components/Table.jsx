@@ -83,7 +83,11 @@ export default function Table({
         </thead>
         <tbody>
           {received.map((row, index) => (
-            <tr key={index} onClick={() => onRowClick(row)}>
+            <tr
+              className="row-clickable"
+              key={index}
+              onClick={() => onRowClick(row)}
+            >
               {columnHeader.map((colName) => {
                 const cell = row[colName];
                 return (
@@ -95,14 +99,21 @@ export default function Table({
                 );
               })}
               <td>
-                <Button type="edit" onClick={() => handleNavigate(row)}>
+                <Button
+                  type="edit"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleNavigate(row);
+                  }}
+                >
                   <img src={editIcon} alt="Edit" width={24} height={24} />
                 </Button>
               </td>
               <td>
                 <Button
                   type="delete"
-                  onClick={async () => {
+                  onClick={async (e) => {
+                    e.stopPropagation();
                     try {
                       await deleteDataFn(row?.id); // ✅ wait for delete to finish
                       setReceived((prev) =>

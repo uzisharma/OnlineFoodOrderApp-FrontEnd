@@ -64,7 +64,7 @@ export default function AddUser() {
   };
 
   return (
-    <div>
+    <>
       <title>Add User</title>
       <Form
         heading={"User"}
@@ -81,6 +81,6 @@ export default function AddUser() {
         title={modalType === "success" ? "Success" : "Error"}
         message={modalMsg}
       />
-    </div>
+    </>
   );
 }

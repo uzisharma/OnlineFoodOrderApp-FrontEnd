@@ -28,6 +28,8 @@ import AddUser from "./pages/admin/user/AddUser";
 import RestaurantPanel from "./pages/admin/restaurant/RestaurantPannel";
 import FoodPanel from "./pages/admin/food/FoodPanel";
 import UserPanel from "./pages/admin/user/UserPanel";
+import AdminList from "./pages/admin/admin/AdminList";
+import OrderPanel from "./pages/admin/order/OrderPanel";
 function App() {
   return (
     <>
@@ -44,6 +46,8 @@ function App() {
 
           {/* Admin Layout */}
           <Route path="admin" element={<AdminPage />}>
+            <Route path="manage-admin" element={<AdminList />} />
+
             <Route path="restaurants" element={<RestaurantList />} />
             <Route path="restaurant/add" element={<AddRestaurant />} />
             <Route path="restaurant/update/:id" element={<EditRestaurant />} />
@@ -65,7 +69,8 @@ function App() {
               path="cart/cart-details/userId/:id"
               element={<CartDetails />}
             />
-            <Route path="/admin/orders" element={<OrderList />} />
+            <Route path="orders" element={<OrderList />} />
+            <Route path="orders/order-details" element={<OrderPanel />} />
             <Route path="/admin/cart" element={<CartList />} />
           </Route>
         </Route>
