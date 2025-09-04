@@ -14,7 +14,7 @@ export default function FoodList() {
     <div className="all-list">
       <title>Food List</title>
       <Table
-        title={"Food"}
+        title={"food"}
         handleNavigate={handleNavigate}
         fetchDataFn={getAllFood}
         deleteDataFn={deleteFoodById}

@@ -58,6 +58,7 @@ export default function Table({
   };
 
   const onRowClick = (data) => {
+    // console.log(data);
     navigate(`${title}-details/`, { state: data });
   };
 

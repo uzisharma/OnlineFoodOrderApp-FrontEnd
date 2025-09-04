@@ -25,6 +25,11 @@ export const getAllFood = async ({
   return response.data;
 };
 
+
+export const getFoodById = async (id) => {
+  return await api.get(`/food/get/${id}`);
+};
+
 export const deleteFoodById = async (id) => {
   return await api.delete(`/food/${id}/delete`);
 };
