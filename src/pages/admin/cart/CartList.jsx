@@ -3,6 +3,7 @@ import { getAllCart } from "../../../service/cartService";
 import "./CartList.css"; // 👈 add CSS file
 import { useNavigate } from "react-router";
 import { Button } from "../../../components/Input";
+import Header from "../../../components/Header";
 
 export default function CartList() {
   const [cartData, setCartData] = useState([]);
@@ -40,14 +41,7 @@ export default function CartList() {
 
   return (
     <div className="cart-container">
-      <header className="cart-heading">
-        User Cart Details
-        <div className="header-back-btn">
-          <Button type="reset" onClick={() => navigate(-1)}>
-            👈 Go Back
-          </Button>
-        </div>
-      </header>
+      <Header heading={"User Cart Details"} />
       <div className="cart-table">
         <table>
           <thead>

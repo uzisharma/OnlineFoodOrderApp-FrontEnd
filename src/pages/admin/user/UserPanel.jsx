@@ -9,10 +9,10 @@ import {
 import AssignedDetails from "../../../components/AssignedDetail";
 import { Button } from "../../../components/Input";
 import CartDetails from "../../../components/CartDetails";
+import Header from "../../../components/Header";
 
 export default function UserPanel() {
   const location = useLocation();
-  const navigate = useNavigate();
   const data = location.state || {};
 
   const [userData, setUserData] = useState([]);
@@ -54,7 +54,6 @@ export default function UserPanel() {
       try {
         const response = await getAllPlacedOrder(userId);
         setOrderData(response?.data?.data?.content || []);
-        console.log("Placed order", response?.data?.data);
         setErrorOrder(null); // reset error if successful
       } catch (err) {
         if (err.response?.status === 404) {
@@ -74,14 +73,7 @@ export default function UserPanel() {
 
   return (
     <div className="panel-detail">
-      <header>
-        <h1>User Panel</h1>
-        <div className="header-back-btn">
-          <Button type="reset" onClick={() => navigate(-1)}>
-            👈 Go Back
-          </Button>
-        </div>
-      </header>
+      <Header heading={"User Panel"} />
 
       <BasicDetail data={userData} />
       <CartDetails receivedCart={cartData} />

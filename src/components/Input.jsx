@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import "./style/Input.css";
 
 export default function Input({
@@ -36,6 +37,17 @@ export function Button({ type = "submit", children, onClick, state }) {
     <button type={type} onClick={onClick} disabled={state}>
       {children}
     </button>
+  );
+}
+
+export function GoBackButton() {
+  const navigate = useNavigate();
+  return (
+    <div className="header-back-btn">
+      <Button type="reset" onClick={() => navigate(-1)}>
+        👈 Go Back
+      </Button>
+    </div>
   );
 }
 

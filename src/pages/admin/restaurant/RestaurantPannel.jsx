@@ -9,6 +9,7 @@ import {
   getRestaurantById,
 } from "../../../service/restaurantService";
 import AssignedDetails from "../../../components/AssignedDetail";
+import Header from "../../../components/Header";
 
 export default function RestaurantPanel() {
   const [resData, setResData] = useState([]);
@@ -16,7 +17,6 @@ export default function RestaurantPanel() {
   const [orderData, setOrderData] = useState([]);
   const [error, setError] = useState(null);
   const [errorOrder, setErrorOrder] = useState(null);
-  const navigate = useNavigate();
 
   const location = useLocation();
   const data = location.state || {};
@@ -80,14 +80,7 @@ export default function RestaurantPanel() {
 
   return (
     <div className="panel-detail">
-      <header>
-        <h1>Restaurant Panel</h1>
-        <div className="header-back-btn">
-          <Button type="reset" onClick={() => navigate(-1)}>
-            👈 Go Back
-          </Button>
-        </div>
-      </header>
+      <Header heading={"Restaurant Panel"} />
       <BasicDetail data={resData} />
       <AssignedDetails title={"food"} data={foodData} error={error} />
       <AssignedDetails title={"order"} data={orderData} error={errorOrder} />

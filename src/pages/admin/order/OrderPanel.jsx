@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation } from "react-router";
 import { getOrderById } from "../../../service/orderService";
-import { Button } from "../../../components/Input";
+import { Button, GoBackButton } from "../../../components/Input";
 import "./style/OrderPanel.css";
+import Header from "../../../components/Header";
 
 export default function OrderPanel() {
-  const navigate = useNavigate();
   const location = useLocation();
   const data = location.state || {};
   const [orderData, setOrderData] = useState();
@@ -30,52 +30,23 @@ export default function OrderPanel() {
     console.log(orderData);
   }, [orderData]);
 
+  const orderDetails = [
+    { title: "Order Id", data: orderData?.id },
+    { title: "Payment Status", data: orderData?.paymentStatus },
+    { title: "User Id", data: orderData?.userId },
+    { title: "User Name", data: orderData?.userName },
+    { title: "Delivery Date", data: orderData?.deliveryDate },
+    { title: "Delivery Time", data: orderData?.deliveryTime },
+  ];
+
   return (
     <div className="panel-detail">
-      <header>
-        <h1>Order Panel</h1>
-        <div className="header-back-btn">
-          <Button type="reset" onClick={() => navigate(-1)}>
-            👈 Go Back
-          </Button>
-        </div>
-      </header>
+      <Header heading={"Order Panel"} />
       <div className="panel-body">
-        <div>
-          <span>Order Id</span>
-          <span>:</span>
-          <span>{orderData?.id}</span>
-        </div>
-        <div>
-          <span>Payment Status</span>
-          <span>:</span>
-          <span>{orderData?.paymentStatus}</span>
-        </div>
-        <div>
-          <span>User Id</span>
-          <span>:</span>
-          <span>{orderData?.userId}</span>
-        </div>
-        <div>
-          <span>User Name</span>
-          <span>:</span>
-          <span>{orderData?.userName}</span>
-        </div>
-        <div>
-          <span>Delivery Date</span>
-          <span>:</span>
-          <span>{orderData?.deliveryDate}</span>
-        </div>
-        <div>
-          <span>Delivery Time</span>
-          <span>:</span>
-          <span>{orderData?.deliveryTime}</span>
-        </div>
-        <div>
-          <span>Restaurant Name</span>
-          <span>:</span>
-          <span>{orderData?.restaurantName}</span>
-        </div>
+        {orderDetails.map((item, idx) => (
+          <PannelDiv key={idx} title={item.title} data={item.data} />
+        ))}
+
         <div>
           <span>Order Item</span>
           <span>:</span>
@@ -98,12 +69,19 @@ export default function OrderPanel() {
             </tbody>
           </table>
         </div>
-        <div>
-          <span>Total Price</span>
-          <span>:</span>
-          <span>{orderData?.totalPrice}</span>
-        </div>
+
+        <PannelDiv title={"Total Price"} data={orderData?.totalPrice} />
       </div>
+    </div>
+  );
+}
+
+function PannelDiv({ title, data }) {
+  return (
+    <div>
+      <span>{title}</span>
+      <span>:</span>
+      <span>{data}</span>
     </div>
   );
 }

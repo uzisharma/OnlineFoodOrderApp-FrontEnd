@@ -2,9 +2,9 @@ import { useLocation, useNavigate } from "react-router";
 import { Button } from "../../../components/Input";
 import { useEffect, useState } from "react";
 import { deleteFoodById, getFoodById } from "../../../service/foodService";
+import Header from "../../../components/Header";
 
 export default function FoodPanel() {
-  const navigate = useNavigate();
   const location = useLocation();
 
   const [foodData, setFoodData] = useState();
@@ -29,14 +29,7 @@ export default function FoodPanel() {
 
   return (
     <div className="panel-detail">
-      <header>
-        <h1>Food Panel</h1>
-        <div className="header-back-btn">
-          <Button type="reset" onClick={() => navigate(-1)}>
-            👈 Go Back
-          </Button>
-        </div>
-      </header>
+      <Header heading={"Food Panel"} />
       <BasicDetail data={foodData} />
     </div>
   );
