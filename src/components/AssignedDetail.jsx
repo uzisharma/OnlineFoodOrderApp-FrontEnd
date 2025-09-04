@@ -2,7 +2,11 @@ import { splitAllNestedArrays } from "../service/genericMethod";
 import GenericTable from "./GenericTable";
 
 export default function AssignedDetails({ title, data, error }) {
-  const { nested, withoutNested } = splitAllNestedArrays(data);
+
+  
+    const { nested, withoutNested } = splitAllNestedArrays(data);
+
+  
   // console.log("nested", nested);
 
   return (

@@ -1,4 +1,12 @@
 export function splitAllNestedArrays(data) {
+  // If data is not an array, return it unchanged with nested=null
+  if (!Array.isArray(data)) {
+    return {
+      nested: null,
+      withoutNested: data,
+    };
+  }
+
   const nested = {};
 
   // Collect all nested arrays

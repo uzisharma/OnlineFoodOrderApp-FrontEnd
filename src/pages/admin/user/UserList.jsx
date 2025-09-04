@@ -15,7 +15,7 @@ export default function UserList() {
     <div className="user-all-list">
       <title>User List</title>
       <Table
-        title={"User"}
+        title={"user"}
         handleNavigate={handleNavigate}
         fetchDataFn={getAllUser}
         deleteDataFn={deleteUserById}

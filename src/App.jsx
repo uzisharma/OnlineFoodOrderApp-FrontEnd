@@ -27,6 +27,7 @@ import CartDetails from "./components/CartDetails";
 import AddUser from "./pages/admin/user/AddUser";
 import RestaurantPanel from "./pages/admin/restaurant/RestaurantPannel";
 import FoodPanel from "./pages/admin/food/FoodPanel";
+import UserPanel from "./pages/admin/user/UserPanel";
 function App() {
   return (
     <>
@@ -59,6 +60,7 @@ function App() {
             <Route path="users" element={<UserList />} />
             <Route path="user/add" element={<AddUser />} />
             <Route path="user/update/:id" element={<EditUser />} />
+            <Route path="users/user-details" element={<UserPanel />} />
             <Route
               path="cart/cart-details/userId/:id"
               element={<CartDetails />}

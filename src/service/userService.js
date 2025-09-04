@@ -23,10 +23,22 @@ export const getAllUser = async ({
   return response.data;
 };
 
+export const getUserById = async (id) => {
+  return await api.get(`/user/get/${id}`);
+};
+
 export const deleteUserById = async (id) => {
   return await api.delete(`/user/${id}/delete`);
 };
 
 export const updateUserById = async (id, updatedUserData) => {
   return api.put(`/user/update?id=${id}`, updatedUserData);
+};
+
+export const getAllPlacedOrder = async (id) => {
+  return api.get(`/user/order/placed/${id}`);
+};
+
+export const getCartByUserId = async (id) => {
+  return api.get(`/cart/get/${id}`);
 };
