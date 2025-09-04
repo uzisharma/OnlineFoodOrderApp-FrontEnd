@@ -8,6 +8,7 @@ import {
 } from "../../../service/userService";
 import AssignedDetails from "../../../components/AssignedDetail";
 import { Button } from "../../../components/Input";
+import CartDetails from "../../../components/CartDetails";
 
 export default function UserPanel() {
   const location = useLocation();
@@ -18,7 +19,6 @@ export default function UserPanel() {
   const [cartData, setCartData] = useState([]);
   const [orderData, setOrderData] = useState([]);
 
-  const [error, setError] = useState(null);
   const [errorOrder, setErrorOrder] = useState(null);
 
   useEffect(() => {
@@ -42,14 +42,10 @@ export default function UserPanel() {
       try {
         const response = await getCartByUserId(userId);
         setCartData(response?.data?.data || []);
-        console.log(response?.data?.data);
-        setError(null); // reset error if successful
+        // console.log(response?.data?.data);
       } catch (err) {
         if (err.response?.status === 404) {
           setCartData([]); // no food found
-          setError("No Cart data available.");
-        } else {
-          setError("Something went wrong while fetching User cart.");
         }
       }
     };
@@ -57,7 +53,8 @@ export default function UserPanel() {
     const getAllOrderPlaced = async (userId) => {
       try {
         const response = await getAllPlacedOrder(userId);
-        setOrderData(response?.data?.data || []);
+        setOrderData(response?.data?.data?.content || []);
+        console.log("Placed order", response?.data?.data);
         setErrorOrder(null); // reset error if successful
       } catch (err) {
         if (err.response?.status === 404) {
@@ -87,7 +84,7 @@ export default function UserPanel() {
       </header>
 
       <BasicDetail data={userData} />
-      {/* <AssignedDetails title={"cart"} data={cartData} error={error} /> */}
+      <CartDetails receivedCart={cartData} />
       <AssignedDetails title={"order"} data={orderData} error={errorOrder} />
     </div>
   );

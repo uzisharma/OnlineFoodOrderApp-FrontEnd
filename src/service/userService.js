@@ -36,8 +36,9 @@ export const updateUserById = async (id, updatedUserData) => {
 };
 
 export const getAllPlacedOrder = async (id) => {
-  return api.get(`/user/order/placed/${id}`);
+  return api.get(`/place-order/get/user-order/${id}`);
 };
+
 
 export const getCartByUserId = async (id) => {
   return api.get(`/cart/get/${id}`);

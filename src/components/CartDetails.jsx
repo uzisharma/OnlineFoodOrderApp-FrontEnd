@@ -1,28 +1,25 @@
 import { useLocation, useNavigate } from "react-router";
-import { useEffect } from "react";
 import { Button } from "../components/Input";
 import "./style/CartDetails.css";
 
-export default function CartDetails() {
+export default function CartDetails({ receivedCart }) {
   const location = useLocation();
   const navigate = useNavigate();
-  const cart = location.state || {};
+  const cart = receivedCart || location.state || {};
 
   const userCart = cart?.userCartItem;
-
-  useEffect(() => {
-    console.log(cart);
-  }, []);
 
   return (
     <div className="cart-container">
       <header className="cart-heading">
         User Cart
-        <div className="header-back-btn">
-          <Button type="reset" onClick={() => navigate(-1)}>
-            👈 Go Back
-          </Button>
-        </div>
+        {receivedCart === undefined && (
+          <div className="header-back-btn">
+            <Button type="reset" onClick={() => navigate(-1)}>
+              👈 Go Back
+            </Button>
+          </div>
+        )}
       </header>
       <div className="cart-card">
         <div className="cart-header">
