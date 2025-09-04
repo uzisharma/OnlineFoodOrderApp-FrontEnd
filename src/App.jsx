@@ -25,6 +25,7 @@ import OrderList from "./pages/admin/order/OrderList";
 import CartList from "./pages/admin/cart/CartList";
 import CartDetails from "./components/CartDetails";
 import AddUser from "./pages/admin/user/AddUser";
+import RestaurantPanel from "./pages/admin/restaurant/RestaurantPannel";
 function App() {
   return (
     <>
@@ -47,19 +48,22 @@ function App() {
               path="/admin/restaurant/update/:id"
               element={<EditRestaurant />}
             />
-            <Route path="/admin/food" element={<FoodList />} />
-            <Route path="/admin/food/add" element={<AddFood />} />
-            <Route path="/admin/food/update/:id" element={<EditFood />} />
-            <Route path="/admin/users" element={<UserList />} />
-            <Route path="/admin/user/add" element={<AddUser />} />
-            <Route path="/admin/user/update/:id" element={<EditUser />} />
+            <Route path="food" element={<FoodList />} />
+            <Route path="food/add" element={<AddFood />} />
+            <Route path="food/update/:id" element={<EditFood />} />
+            <Route path="users" element={<UserList />} />
+            <Route path="user/add" element={<AddUser />} />
+            <Route path="user/update/:id" element={<EditUser />} />
             <Route
               path="cart/cart-details/userId/:id"
               element={<CartDetails />}
             />
             <Route path="/admin/orders" element={<OrderList />} />
-
             <Route path="/admin/cart" element={<CartList />} />
+            <Route
+              path="restaurants/restaurant-details"
+              element={<RestaurantPanel />}
+            />
           </Route>
         </Route>
       </Routes>

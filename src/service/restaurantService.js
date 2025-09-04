@@ -25,10 +25,17 @@ export const saveRestaurant = async (restaurantData) => {
 };
 
 export const deleteRestaurantById = async (id) => {
-  console.log(id);
   return await api.delete(`/restaurant/${id}/delete`);
 };
 
 export const updateRestaurantById = async (id, updatedData) => {
   return await api.put(`/restaurant/update?id=${id}`, updatedData);
+};
+
+export const getAssignedFood = async (restaurantId) => {
+  return await api.get(`/restaurant/${restaurantId}/getAll`);
+};
+
+export const getAllOrders = async (restaurantId) => {
+  return await api.get(`/restaurant/${restaurantId}/order/getAll`);
 };

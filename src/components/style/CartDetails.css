@@ -6,11 +6,7 @@
   position: relative;
 }
 
-.header-back-btn {
-  position: absolute;
-  top: 0;
-  left: 10px;
-}
+
 
 .cart-card {
   border: 1px solid #ddd;

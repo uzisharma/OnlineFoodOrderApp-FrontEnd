@@ -18,6 +18,7 @@ export default function Table({
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const size = 10;
+  const heading = title + "";
 
   // sorting state only
   const [sortBy, setSortBy] = useState("id");
@@ -56,15 +57,14 @@ export default function Table({
     }
   };
 
+  const onRowClick = (data) => {
+    navigate(`${title}-details/`, { state: data });
+  };
+
   return (
     <div className="table-container">
       <header>
-        <h1>{title}</h1>
-        <div className="header-back-btn">
-          <Button type="reset" onClick={() => navigate(-1)}>
-            👈 Go Back
-          </Button>
-        </div>
+        <h1>{heading.charAt(0).toUpperCase() + heading.slice(1) + "s"}</h1>
       </header>
 
       <table>
@@ -82,12 +82,9 @@ export default function Table({
         </thead>
         <tbody>
           {received.map((row, index) => (
-            <tr key={index}>
+            <tr key={index} onClick={() => onRowClick(row)}>
               {columnHeader.map((colName) => {
                 const cell = row[colName];
-                {
-                  /* return <td key={colName}>{cell ?? "N/A"}</td>; */
-                }
                 return (
                   <td key={colName}>
                     {typeof cell === "object" && cell !== null

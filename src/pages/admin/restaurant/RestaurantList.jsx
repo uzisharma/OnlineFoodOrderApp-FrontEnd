@@ -17,7 +17,7 @@ export default function RestaurantList() {
     <div className="restaurant-list-container">
       <title>Restaurants List</title>
       <Table
-        title={"Restaurants"}
+        title={"restaurant"}
         handleNavigate={handleNavigate}
         fetchDataFn={getAllRestaurant}
         deleteDataFn={deleteRestaurantById}
