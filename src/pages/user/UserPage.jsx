@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { FoodCard, RestaurantCard } from "../components/Card";
+import { FoodCard, RestaurantCard } from "../../components/Card";
 import "./style/UserPage.css";
-import { useRole } from "../context/RoleContext";
-import { addToCart } from "../service/cartService";
+import { useRole } from "../../context/RoleContext";
+import { addToCart } from "../../service/cartService";
 
 export default function UserPage() {
   const [foodList, setFoodList] = useState([]);

@@ -1,8 +1,7 @@
 import { useLocation, useNavigate } from "react-router";
 import "./style/BillingDetails.css";
-import { Button } from "../components/Input";
+import { Button } from "../../components/Input";
 import { useEffect, useState } from "react";
-
 
 export default function BillingDetails() {
   const [placed, setPlaced] = useState(false);

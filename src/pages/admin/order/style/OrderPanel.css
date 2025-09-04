@@ -1,0 +1,23 @@
+.panel-body {
+  width: 65%;
+  font-size: 1.3em;
+  margin-top: 2rem;
+  border-radius: 5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.panel-body > div {
+  margin-top: 1rem;
+  padding: 2rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.panel-body > div > span {
+  flex: 1;
+}
+
+.panel-body > div > table {
+  flex: 3.7;
+}

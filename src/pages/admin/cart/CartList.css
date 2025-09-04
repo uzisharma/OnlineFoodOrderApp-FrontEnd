@@ -1,0 +1,41 @@
+.cart-container {
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+  width: 95%;
+  height: 100%;
+}
+
+.cart-table > table > tbody > tr {
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgb(224, 222, 248);
+  }
+}
+
+.cart-table > table th,
+td {
+  padding: 1rem;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.pagination button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: #007bff;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}

@@ -1,3 +1,4 @@
 .restaurant-list-container {
-  margin-top: 20px;
+  flex: 1;
+  height: 100%;
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Button, SelectInput } from "../components/Input";
+import { Button, SelectInput } from "../../components/Input";
 import { useLocation, useNavigate } from "react-router";
-import { useRole } from "../context/RoleContext";
+import { useRole } from "../../context/RoleContext";
 import axios from "axios";
 
 export default function PaymentPage() {

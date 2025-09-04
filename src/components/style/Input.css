@@ -14,7 +14,9 @@ label {
 }
 
 /* Input */
-input:is([type="text"], [type="number"], [type="password"], [type="email"]),select {
+input:is([type="text"], [type="number"], [type="password"], [type="email"]),
+select,
+textarea {
   padding: 0.625rem 0.9375rem;
   border-radius: 0.5rem;
   border: 1px solid #ccc;
@@ -31,6 +33,7 @@ input:is([type="text"], [type="number"], [type="password"], [type="email"]),sele
 }
 
 
+
 .checkbox-label{
   display: flex;
   justify-content: flex-end;
@@ -43,9 +46,6 @@ input:is([type="text"], [type="number"], [type="password"], [type="email"]),sele
   cursor: pointer;
 }
 
-#address {
-  height: 100px;
-}
 
 /* Button container */
 .button-container {
@@ -81,6 +81,10 @@ button {
 
 button[type="reset"] {
   background-color: #6c757d;
+
+  &:hover{
+  background-color: #5a6268;
+  }
 }
 
 
@@ -99,7 +103,3 @@ button img {
   }
 }
 
-
-button[type="reset"]:hover {
-  background-color: #5a6268;
-}
