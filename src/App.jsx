@@ -36,8 +36,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          {/* <Route path="/restaurant-details/:id" element={<EditRestaurant />} /> */}
           <Route path="/login" element={<LoginOrRegister />} />
+
+          <Route path="/user" element={<UserPage />}></Route>
           <Route path="/user-page" element={<UserPage />} />
           <Route path="/res-details" element={<RestaurantPage />} />
           <Route path="/user-cart-details" element={<UserCart />} />

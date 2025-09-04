@@ -40,6 +40,7 @@ export default function UserPage() {
   }, []);
 
   const handleAddToCart = async (restaurantId, foodId, quantity) => {
+    // console.log(restaurantId, foodId, quantity);
     let resId;
     if (restaurantId.length === 0) {
       resId = 1;

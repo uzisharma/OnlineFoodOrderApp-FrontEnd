@@ -3,11 +3,30 @@ import "./style/RestaurantPage.css";
 import { FoodCard } from "../../components/Card";
 import { useRole } from "../../context/RoleContext";
 import { addToCart } from "../../service/cartService";
+import { useEffect, useState } from "react";
+import { getRestaurantById } from "../../service/restaurantService";
 
 export default function RestaurantPage() {
   const location = useLocation();
   const { setCartItemCount, userDetails } = useRole();
-  const data = location.state;
+  const [resData, setResData] = useState();
+  const data = location.state || {};
+
+  useEffect(() => {
+    const fetchRestaurant = async (id) => {
+      try {
+        const response = await getRestaurantById(id);
+        setResData(response?.data?.data || {}); // ✅ store actual restaurant
+      } catch (err) {
+        console.error("Failed to fetch restaurant:", err);
+        setResData({});
+      }
+    };
+
+    if (data?.id) {
+      fetchRestaurant(data.id);
+    }
+  }, [data?.id]);
 
   const handleAddToCart = async (restaurantId, foodId, quantity) => {
     const response = await addToCart(
@@ -22,11 +41,11 @@ export default function RestaurantPage() {
   return (
     <div className="restaurant-page">
       <div className="res-details">
-        <h1>{data.restaurantName}</h1>
+        <h1>{resData?.restaurantName}</h1>
         <span className="rating">{`⭐4.5`}</span>
-        <span>{data.address}</span>
-        <span>{data.contactNumber}</span>
-        <span>{data.email}</span>
+        <span>{resData?.address}</span>
+        <span>{resData?.contactNumber}</span>
+        <span>{resData?.email}</span>
         <div className="res-sub-details">
           <SubDetails top={"Delivery Time"} bottom={"30-40 min"} />
           <SubDetails top={"Delivery Time"} bottom={"30-40 min"} />
@@ -36,13 +55,13 @@ export default function RestaurantPage() {
       <div className="res-menu">
         <header>Menu</header>
         <div className="menu-list">
-          {data?.food.map((foodDetails) => (
+          {resData?.foodList.map((foodDetails) => (
             <FoodCard
               foodMenu={"foodMenu"}
               key={foodDetails?.id}
               food={foodDetails}
               addToCart={handleAddToCart}
-              resId={data?.id}
+              resId={resData?.id}
             />
           ))}
         </div>

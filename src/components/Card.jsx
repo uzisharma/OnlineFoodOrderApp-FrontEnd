@@ -7,6 +7,8 @@ import { useNavigate } from "react-router";
 export function FoodCard({ food, foodMenu, addToCart, resId }) {
   const [expanded, setExpanded] = useState(false);
   const [foodQunatity, setFoodQuantity] = useState(0);
+  // console.log("FoodCard Food : ", food);
+  // console.log("ResId : ", resId);
   return (
     <>
       {/* <title>User Page</title> */}
