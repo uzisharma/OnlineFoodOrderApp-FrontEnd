@@ -6,19 +6,37 @@ import {
   getAssignedFood,
   getAllOrders,
   deleteRestaurantById,
+  getRestaurantById,
 } from "../../../service/restaurantService";
 import AssignedDetails from "../../../components/AssignedDetail";
 
 export default function RestaurantPanel() {
+  const [resData, setResData] = useState([]);
   const [foodData, setFoodData] = useState([]);
   const [orderData, setOrderData] = useState([]);
   const [error, setError] = useState(null);
   const [errorOrder, setErrorOrder] = useState(null);
-  const [refreshTrigger, setRefreshTrigger] = useState(0);
   const navigate = useNavigate();
 
   const location = useLocation();
   const data = location.state || {};
+
+  useEffect(() => {
+    const fetchRestaurant = async (id) => {
+      try {
+        const response = await getRestaurantById(id);
+        setResData(response?.data?.data || {}); // ✅ store actual restaurant
+      } catch (err) {
+        console.error("Failed to fetch restaurant:", err);
+        setResData({});
+      }
+    };
+
+    if (data?.id) {
+      fetchRestaurant(data.id);
+    }
+  }, [data?.id]);
+
   useEffect(() => {
     const getAllFood = async (restaurantId) => {
       try {
@@ -70,18 +88,17 @@ export default function RestaurantPanel() {
           </Button>
         </div>
       </header>
-      <BasicDetail data={data} setTrigger={setRefreshTrigger} />
+      <BasicDetail data={resData} />
       <AssignedDetails title={"food"} data={foodData} error={error} />
       <AssignedDetails title={"order"} data={orderData} error={errorOrder} />
     </div>
   );
 }
 
-function BasicDetail({ data, setTrigger }) {
+function BasicDetail({ data }) {
   const navigate = useNavigate();
   const goToEdit = (data) => {
     navigate(`/admin/restaurant/update/${data.id}`, { state: { data } });
-    setTrigger((prev) => prev + 1);
   };
 
   const deleteRes = (id) => {

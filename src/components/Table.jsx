@@ -35,7 +35,7 @@ export default function Table({
         });
         setReceived(data?.data?.content || []);
         setTotalPages(data?.data?.totalPages || 0);
-        console.log(data.data);
+        // console.log(data.data);
       } catch (error) {
         console.error("Failed to fetch data", error);
       }

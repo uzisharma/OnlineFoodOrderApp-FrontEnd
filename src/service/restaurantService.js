@@ -24,6 +24,10 @@ export const saveRestaurant = async (restaurantData) => {
   return await api.post("/restaurant/save", restaurantData);
 };
 
+export const getRestaurantById = async (id) => {
+  return await api.get(`/restaurant/get/${id}`);
+};
+
 export const deleteRestaurantById = async (id) => {
   return await api.delete(`/restaurant/${id}/delete`);
 };

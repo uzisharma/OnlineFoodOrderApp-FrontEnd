@@ -3,7 +3,7 @@ import GenericTable from "./GenericTable";
 
 export default function AssignedDetails({ title, data, error }) {
   const { nested, withoutNested } = splitAllNestedArrays(data);
-  console.log("nested", nested);
+  // console.log("nested", nested);
 
   return (
     <div className="assigned-detail">
@@ -11,7 +11,7 @@ export default function AssignedDetails({ title, data, error }) {
       {error ? (
         <p style={{ color: "red" }}>{`No ${title} is Assigned`}</p>
       ) : (
-        <GenericTable title={title} data={withoutNested} />
+        <GenericTable title={title} data={withoutNested} nested={nested} />
       )}
     </div>
   );

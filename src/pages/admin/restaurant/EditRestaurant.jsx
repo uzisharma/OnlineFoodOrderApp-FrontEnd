@@ -16,14 +16,18 @@ export default function EditRestaurant() {
   const [modalMsg, setModalMsg] = useState("");
   const [modalType, setModalType] = useState("success"); // success | error
 
+  const [updatedRow, setUpdatedRow] = useState({});
+
   const handleSubmit = (updatedData) => {
-    console.log(updatedData);
+    // console.log(updatedData);
     updateRestaurantById(id, updatedData)
       .then((res) => {
-        console.log("Update Success", res.data);
+        const updated = res.data;
         setModalMsg("Restaurant updated successfully!");
         setModalType("success");
         setIsModalOpen(true);
+
+        setUpdatedRow(updated);
       })
       .catch((error) => {
         console.error("Update error", error);
@@ -35,7 +39,7 @@ export default function EditRestaurant() {
 
   const handleOnClose = () => {
     if (modalType === "success") {
-      navigate(-1); // go back after success
+      navigate(-1, { state: { updated: updatedRow } }); // go back after success
     }
     setIsModalOpen(false); // close modal
   };
